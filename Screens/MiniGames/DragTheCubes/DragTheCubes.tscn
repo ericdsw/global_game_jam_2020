@@ -6,7 +6,7 @@
 
 [node name="DragTheCubes" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-duration = 100.0
+duration = 3.0
 instructions = "DRAG!!!"
 
 [node name="Sprite" type="Sprite" parent="." index="1"]

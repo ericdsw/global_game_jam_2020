@@ -9,7 +9,7 @@
 [ext_resource path="res://Resources/FixCar/BlueLightT.png" type="Texture" id=7]
 [ext_resource path="res://Resources/FixCar/RedLightT.png" type="Texture" id=8]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "flash"
 length = 0.4
 loop = true
@@ -26,8 +26,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 7 ), ExtResource( 8 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "kick"
+[sub_resource type="Animation" id=2]
 length = 0.2
 step = 0.02
 tracks/0/type = "value"
@@ -70,7 +69,7 @@ texture = ExtResource( 4 )
 position = Vector2( -284.179, 1.89453 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lights" index="0"]
-anims/flash = SubResource( 2 )
+anims/flash = SubResource( 1 )
 
 [node name="Leg" type="Sprite" parent="." index="4"]
 position = Vector2( 130, 185 )
@@ -78,7 +77,7 @@ rotation = 1.62316
 texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Leg" index="0"]
-anims/kick = SubResource( 1 )
+anims/kick = SubResource( 2 )
 
 [node name="Thief" type="Sprite" parent="." index="5"]
 position = Vector2( 149.954, 132.259 )
