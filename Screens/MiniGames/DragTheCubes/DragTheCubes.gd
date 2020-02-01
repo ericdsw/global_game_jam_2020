@@ -1,7 +1,7 @@
 extends BaseMinigame
 
 const CUBE_PATH := "res://Screens/Minigames/DragTheCubes/Elements/LetterCube.tscn"
-const POSSIBLE_LETTERS := ["A", "B", "C", "D"]
+const POSSIBLE_LETTERS := ["A", "B", "C", "D", "E", "F", "G", "H"]
 
 var _cubes := []
 
@@ -21,6 +21,7 @@ func _ready() -> void:
 	_select_letters()
 
 func _process(_delta: float) -> void:
+	
 	if _current_cube != null and !_performing_swap:
 		_current_cube.global_position = get_global_mouse_position() - _offset_to_cur_cube
 		var _areas = _current_cube.detection_area.get_overlapping_areas()
@@ -34,7 +35,9 @@ func _process(_delta: float) -> void:
 				if _closest_cube == null:
 					_closest_cube = area.get_parent()
 				else:
-					if _closest_cube.global_position.distance_to(_current_cube.global_position) > area.get_parent().global_position.distance_to(_current_cube.global_position):
+					var _close_cube_dist = _closest_cube.global_position.distance_to(_current_cube.global_position)
+					var _cur_dist = area.get_parent().global_position.distance_to(_current_cube.global_position)
+					if _close_cube_dist > _cur_dist:
 						_closest_cube = area.get_parent()
 		
 		if _closest_cube != null:
@@ -55,10 +58,7 @@ func _input(event: InputEvent) -> void:
 				
 				for cube in _cubes:
 					cube.modulate = Color.white
-				
 				_check_change()
-#				_current_cube = null
-#				_offset_to_cur_cube = Vector2()
 
 
 func start(difficulty := 1) -> void:
@@ -85,7 +85,10 @@ func _check_change() -> void:
 			else:
 				var _cur_cube := area.get_parent() as LetterCube
 				var _check_pos := _current_cube.global_position
-				if _cur_cube.global_position.distance_to(_check_pos) < _cube_to_swap.global_position.distance_to(_check_pos):
+				var _cur_dist : int = _cur_cube.global_position.distance_to(_check_pos)
+				var _swap_dist : int = _cube_to_swap.global_position.distance_to(_check_pos)
+				
+				if _cur_dist < _swap_dist:
 					_cube_to_swap = _cur_cube
 		
 		_current_cube.move_to(_cube_to_swap.global_position)
@@ -116,7 +119,7 @@ func _select_letters() -> void:
 	
 	_swap_cubes(_rand_change_pair_1, _rand_change_pair_2)
 
-func _swap_cubes(pos1, pos2) -> void:
+func _swap_cubes(pos1: int, pos2: int) -> void:
 	var _temporal = _selected_letters[pos1]
 	_selected_letters[pos1] = _selected_letters[pos2]
 	_selected_letters[pos2] = _temporal
