@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/MiniGames/FixTV/FixTVMinigame.gd" type="Script" id=2]
+[ext_resource path="res://Resources/FixTV/tv-off.png" type="Texture" id=3]
+[ext_resource path="res://Resources/FixTV/tv-static.png" type="Texture" id=4]
+[ext_resource path="res://Resources/FixTV/tv-on.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "bad_hit"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.06, 0.11, 0.13, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "good_hit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), ExtResource( 5 ) ]
+}
+
+[node name="FixTVMinigame" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+duration = 3.0
+
+[node name="TV" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TV" index="0"]
+anims/bad_hit = SubResource( 1 )
+anims/good_hit = SubResource( 2 )
+
+[node name="RestTimer" type="Timer" parent="." index="2"]
+wait_time = 0.5
+one_shot = true
+[connection signal="timeout" from="RestTimer" to="." method="_on_RestTimer_timeout"]
