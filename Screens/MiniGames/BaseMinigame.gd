@@ -50,8 +50,9 @@ func on_success() -> void:
 # will be automatically called when the deadline timer runs out, so subclasses
 # are not required to call it directly
 func on_failure() -> void:
-	_is_active = false
-	emit_signal("failure")
+	if _is_active:
+		_is_active = false
+		emit_signal("failure")
 
 # ================================ Callbacks ================================ #
 
