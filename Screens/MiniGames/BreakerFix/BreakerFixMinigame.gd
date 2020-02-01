@@ -20,7 +20,6 @@ const HARD_AMOUNT := {
 
 onready var left_container := get_node("LeftBreakerContainer") as VBoxContainer
 onready var right_container := get_node("RightBreakerContainer") as VBoxContainer
-onready var breaker_tool := get_node("BreakerTool") as Node2D
 
 var _cur_amount := 0
 var _cur_damaged := 0
