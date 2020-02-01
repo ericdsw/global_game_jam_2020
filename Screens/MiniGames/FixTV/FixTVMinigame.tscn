@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/FixTV/FixTVMinigame.gd" type="Script" id=2]
 [ext_resource path="res://Resources/FixTV/tv-off.png" type="Texture" id=3]
 [ext_resource path="res://Resources/FixTV/tv-static.png" type="Texture" id=4]
 [ext_resource path="res://Resources/FixTV/tv-on.png" type="Texture" id=5]
+[ext_resource path="res://Resources/FixTV/BGT.png" type="Texture" id=6]
+[ext_resource path="res://Resources/FixTV/FootT.png" type="Texture" id=7]
+[ext_resource path="res://Resources/FixTV/FistT.png" type="Texture" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bad_hit"
@@ -43,14 +46,44 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 duration = 3.0
 
-[node name="TV" type="Sprite" parent="." index="1"]
-texture = ExtResource( 3 )
+[node name="Background" type="Sprite" parent="." index="1"]
+texture = ExtResource( 6 )
+
+[node name="TV" type="Sprite" parent="." index="2"]
+position = Vector2( 0, -39 )
+texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TV" index="0"]
 anims/bad_hit = SubResource( 1 )
 anims/good_hit = SubResource( 2 )
 
-[node name="RestTimer" type="Timer" parent="." index="2"]
+[node name="RestTimer" type="Timer" parent="." index="3"]
 wait_time = 0.5
 one_shot = true
+
+[node name="Arm" type="Sprite" parent="." index="4"]
+position = Vector2( -775.847, -38.8409 )
+texture = ExtResource( 8 )
+
+[node name="Foot" type="Sprite" parent="." index="5"]
+position = Vector2( 764.31, -61.7132 )
+texture = ExtResource( 7 )
+
+[node name="ArmRest" type="Position2D" parent="." index="6"]
+position = Vector2( -778, -37 )
+
+[node name="FootRest" type="Position2D" parent="." index="7"]
+position = Vector2( 767, -58 )
+
+[node name="ArmFinal" type="Position2D" parent="." index="8"]
+position = Vector2( -450, -50 )
+
+[node name="FootFinal" type="Position2D" parent="." index="9"]
+position = Vector2( 434, -180 )
+
+[node name="ArmTween" type="Tween" parent="." index="10"]
+
+[node name="FootTween" type="Tween" parent="." index="11"]
 [connection signal="timeout" from="RestTimer" to="." method="_on_RestTimer_timeout"]
+[connection signal="tween_completed" from="ArmTween" to="." method="_on_ArmTween_tween_completed"]
+[connection signal="tween_completed" from="FootTween" to="." method="_on_FootTween_tween_completed"]
