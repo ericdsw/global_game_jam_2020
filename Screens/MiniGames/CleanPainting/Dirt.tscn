@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/CleanPainting/Dirt.png" type="Texture" id=1]
+[ext_resource path="res://Screens/MiniGames/CleanPainting/Dirt.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.4003
+
+[node name="Dirt" type="Sprite"]
+position = Vector2( -230.087, -155.445 )
+scale = Vector2( 0.535731, 0.503151 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=[
+"Cleaning",
+]]
+position = Vector2( -2.7309, 4.84622 )
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
