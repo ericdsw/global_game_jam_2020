@@ -42,8 +42,9 @@ func start(difficulty := 1) -> void:
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer
 func on_success() -> void:
-	_is_active = false
-	emit_signal("success", _lifetime)
+	if _is_active:
+		_is_active = false
+		emit_signal("success", _lifetime)
 
 # Call this methid if the minigame's fail condition is met. Note that this method
 # will be automatically called when the deadline timer runs out, so subclasses

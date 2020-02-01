@@ -6,6 +6,7 @@ extends Node2D
 var _instruction_res := preload("res://Screens/Overlays/Instructions/InstructionsOverlay.tscn")
 var _success_res := preload("res://Screens/Overlays/Finish/Success.tscn")
 var _failure_res := preload("res://Screens/Overlays/Finish/Failure.tscn")
+var _score_res := preload("res://Screens/Overlays/Finish/GameOverOverlay.tscn")
 
 # Paths to all possible minigame scenes should be defined here.
 export (Array, String, FILE) var minigames := []
@@ -18,6 +19,12 @@ onready var main_menu_wrapper := get_node("MainMenuWrapper") as Control
 # scene path inside the `minigames` array should be used to instance the next 
 # minigame
 var _current_minigame_offset := 0 
+
+# The current score
+var _score := 0
+
+# How many lives the player has
+var _lives := 4
 
 # The current active minigame instance
 var _cur_minigame : BaseMinigame
@@ -32,6 +39,10 @@ func _start_game() -> void:
 		# never happen.
 		print("No minigames defined")
 	else:
+
+		# Reset the score
+		_score = 0
+
 		# Enqueue the first minigame without calling `_go_to_next_offset()` to
 		# start the game.
 		var _first_minigame := load(minigames[0]).instance() as BaseMinigame
@@ -79,13 +90,21 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 
 # Called when all defined minigames are finished
 func _game_finished() -> void:
-	print("finished")
+	_show_game_over()
 
 func _show_main_menu() -> void:
 	main_menu_wrapper.show()
 
 func _hide_main_menu() -> void:
 	main_menu_wrapper.hide()
+
+func _calculate_score(time_left: float) -> void:
+	_score += int(floor(time_left * 10))
+
+func _show_game_over() -> void:
+	var _game_over_inst := _score_res.instance() as BaseOverlay
+	add_child(_game_over_inst)
+	_game_over_inst.show_score(_score)
 
 # ================================ Callbacks ================================ #
 
@@ -102,6 +121,10 @@ func _on_instructions_finished() -> void:
 
 # Show the success screen
 func _on_miningame_succeeded(_time_left: float) -> void:
+
+	# Calculate what will be added to the score depending on the time left
+	_calculate_score(_time_left)
+	
 	var _success_ins = _success_res.instance()
 	overlay_node.add_child(_success_ins)
 	yield(_success_ins, "finished")
@@ -109,7 +132,12 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 
 # Show the failure screen
 func _on_minigame_failure() -> void:
-	var _failure_ins = _failure_res.instance()
-	overlay_node.add_child(_failure_ins)
-	yield(_failure_ins, "finished")
-	_go_to_next_minigame()
+
+	_lives -= 1
+	if _lives > 0:
+		var _failure_ins = _failure_res.instance()
+		overlay_node.add_child(_failure_ins)
+		yield(_failure_ins, "finished")
+		_go_to_next_minigame()
+	else:
+		_show_game_over()
