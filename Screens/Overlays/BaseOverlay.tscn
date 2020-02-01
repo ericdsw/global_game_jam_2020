@@ -9,6 +9,7 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = -512.0
 margin_bottom = -300.0
+rect_pivot_offset = Vector2( 512, 300 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,5 +28,8 @@ __meta__ = {
 [node name="LifeTimer" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
 [connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,16 +1,29 @@
 extends Node2D
 class_name BaseMinigame
 
+# How much time before the task auto fails
 export (float) var duration := 1.0
-export (String) var instructions := ""
 
-onready var deadline_timer := get_node("DeadlineTimer") as Timer
+# The instruction text to show in the transition overlay
+export (String) var instructions := ""
 
 # Use this variable to decide any custom logic based on difficulty
 var _assigned_difficulty : int = 1
 
+# Lifetime management variables
+var _lifetime := 0.0
+var _is_active := false
+
 signal success(time_left)
 signal failure()
+
+# ================================ Lifecycle ================================ #
+
+func _process(delta: float) -> void:
+	if _is_active:
+		_lifetime -= delta
+		if _lifetime <= 0.0:
+			on_failure()
 
 # ================================= Public ================================== #
 
@@ -23,24 +36,24 @@ signal failure()
 func start(difficulty := 1) -> void:
 
 	_assigned_difficulty = difficulty
-
-	deadline_timer.wait_time = duration
-	deadline_timer.start()
+	_lifetime = duration
+	_is_active = true
 
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer
 func on_success() -> void:
-	deadline_timer.stop()
-	emit_signal("success", deadline_timer.time_left)
+	_is_active = false
+	emit_signal("success", _lifetime)
 
 # Call this methid if the minigame's fail condition is met. Note that this method
 # will be automatically called when the deadline timer runs out, so subclasses
 # are not required to call it directly
 func on_failure() -> void:
-	deadline_timer.stop()
+	_is_active = false
 	emit_signal("failure")
 
 # ================================ Callbacks ================================ #
 
+# Connected via UI
 func _on_DeadlineTimer_timeout() -> void:
 	on_failure()
