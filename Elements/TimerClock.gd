@@ -10,6 +10,6 @@ func set_max_time(max_time : float) -> void:
 func display_time(time: float) -> void:
 	
 	var _completion_percent = time / _max_time
-	var _angle = -360.0 * _completion_percent
+	var _angle = clamp(-360.0 * _completion_percent, -360.0, 0.0)
 	
 	hand_sprite.rotation_degrees = _angle

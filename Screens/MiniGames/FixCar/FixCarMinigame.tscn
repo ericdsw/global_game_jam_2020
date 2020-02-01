@@ -57,6 +57,7 @@ tracks/1/keys = {
 [node name="FixCarMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 1.5
+no_overlay_for_fail = true
 
 [node name="Background" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
@@ -67,6 +68,7 @@ texture = ExtResource( 4 )
 
 [node name="Lights" type="Sprite" parent="." index="3"]
 position = Vector2( -284.179, 1.89453 )
+texture = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lights" index="0"]
 anims/flash = SubResource( 1 )
@@ -82,3 +84,8 @@ anims/kick = SubResource( 2 )
 [node name="Thief" type="Sprite" parent="." index="5"]
 position = Vector2( 149.954, 132.259 )
 texture = ExtResource( 5 )
+
+[node name="EndTimer" type="Timer" parent="." index="7"]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

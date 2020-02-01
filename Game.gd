@@ -68,6 +68,7 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	# Perform the required minigame connections
 	_minigame.connect("success", self, "_on_miningame_succeeded")
 	_minigame.connect("failure", self, "_on_minigame_failure")
+	_minigame.connect("request_next", self, "_on_minigame_request_next")
 	
 	# Show the minigame's required instruction screen
 	var _instructions = _instruction_res.instance()
@@ -125,19 +126,19 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 	# Calculate what will be added to the score depending on the time left
 	_calculate_score(_time_left)
 	
-	var _success_ins = _success_res.instance()
-	overlay_node.add_child(_success_ins)
-	yield(_success_ins, "finished")
-	_go_to_next_minigame()
+	if !_cur_minigame.no_overlay_for_fail:
+		var _success_ins = _success_res.instance()
+		overlay_node.add_child(_success_ins)
+		yield(_success_ins, "finished")
+		_go_to_next_minigame()
 
 # Show the failure screen
 func _on_minigame_failure() -> void:
-
-	_lives -= 1
-	if _lives > 0:
+	if !_cur_minigame.no_overlay_for_fail:
 		var _failure_ins = _failure_res.instance()
 		overlay_node.add_child(_failure_ins)
 		yield(_failure_ins, "finished")
 		_go_to_next_minigame()
-	else:
-		_show_game_over()
+
+func _on_minigame_request_next() -> void:
+	_go_to_next_minigame()
