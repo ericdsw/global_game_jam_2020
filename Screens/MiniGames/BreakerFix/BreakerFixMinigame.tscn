@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.gd" type="Script" id=2]
+[ext_resource path="res://Resources/BreakerFix/breaker_box.png" type="Texture" id=3]
+
+[node name="BreakerFixMinigame" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+duration = 100.0
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )
+
+[node name="LeftBreakerContainer" type="VBoxContainer" parent="." index="2"]
+margin_left = -116.0
+margin_top = -181.0
+margin_right = -14.0
+margin_bottom = 183.0
+rect_min_size = Vector2( 102, 364 )
+custom_constants/separation = 12
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightBreakerContainer" type="VBoxContainer" parent="." index="3"]
+margin_left = 115.0
+margin_top = -181.0
+margin_right = 217.0
+margin_bottom = 183.0
+rect_min_size = Vector2( 102, 364 )
+rect_scale = Vector2( -1, 1 )
+custom_constants/separation = 12
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
