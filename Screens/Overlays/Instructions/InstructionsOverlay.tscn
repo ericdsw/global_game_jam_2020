@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Screens/Overlays/BaseOverlay.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/Overlays/Instructions/InstructionsOverlay.gd" type="Script" id=2]
+
+[node name="InstructionsOverlay" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="." index="3"]
+margin_top = 2.0
+margin_right = 1024.0
+margin_bottom = 602.0
+rect_min_size = Vector2( 1024, 600 )
+text = "FOO INSTRUCTION"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "BaseMinigame",
+"language": "GDScript",
+"path": "res://Screens/MiniGames/BaseMinigame.gd"
+}, {
+"base": "Control",
+"class": "BaseOverlay",
+"language": "GDScript",
+"path": "res://Screens/Overlays/BaseOverlay.gd"
+}, {
+"base": "BaseOverlay",
+"class": "InstructionsOverlay",
+"language": "GDScript",
+"path": "res://Screens/Overlays/Instructions/InstructionsOverlay.gd"
+} ]
 _global_script_class_icons={
-
+"BaseMinigame": "",
+"BaseOverlay": "",
+"InstructionsOverlay": ""
 }
 
 [application]
