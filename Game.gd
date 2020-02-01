@@ -103,7 +103,7 @@ func _calculate_score(time_left: float) -> void:
 
 func _show_game_over() -> void:
 	var _game_over_inst := _score_res.instance() as BaseOverlay
-	add_child(_game_over_inst)
+	overlay_node.add_child(_game_over_inst)
 	_game_over_inst.show_score(_score)
 
 # ================================ Callbacks ================================ #

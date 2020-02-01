@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/DragTheCubes/DragTheCubes.gd" type="Script" id=2]
+[ext_resource path="res://Resources/DragTheCubes/BGT.png" type="Texture" id=3]
 
 [node name="DragTheCubes" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 100.0
 instructions = "DRAG!!!"
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+texture = ExtResource( 3 )

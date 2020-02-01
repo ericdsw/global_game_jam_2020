@@ -1,12 +1,15 @@
 extends Node2D
 class_name LetterCube
 
+const PATH := "res://Resources/DragTheCubes/%sT.png"
+
 onready var background_sprite := get_node("Sprite") as Sprite
 onready var letter_label := get_node("Label") as Label
 onready var detection_area := get_node("DetectionArea") as Area2D
 onready var tween := get_node("Tween") as Tween
 
 var assigned_letter := ""
+var cube_size := 300.0
 
 signal finished_movement()
 
@@ -16,6 +19,7 @@ func get_cube_size() -> Vector2:
 func show_letter(letter: String) -> void:
 	assigned_letter = letter
 	letter_label.text = letter
+	background_sprite.texture = load(PATH % letter)
 
 func contains_position(pos: Vector2) -> bool:
 	var rect := Rect2(

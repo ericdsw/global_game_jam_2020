@@ -47,6 +47,6 @@ __meta__ = {
 }
 
 [node name="OverlayNode" type="Node2D" parent="."]
-z_index = 10
+z_index = 100
 [connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]
