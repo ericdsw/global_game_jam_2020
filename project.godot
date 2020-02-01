@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "InstructionsOverlay",
 "language": "GDScript",
 "path": "res://Screens/Overlays/Instructions/InstructionsOverlay.gd"
+}, {
+"base": "Node2D",
+"class": "LetterCube",
+"language": "GDScript",
+"path": "res://Screens/MiniGames/DragTheCubes/Elements/LetterCube.gd"
 } ]
 _global_script_class_icons={
 "BaseMinigame": "",
 "BaseOverlay": "",
-"InstructionsOverlay": ""
+"InstructionsOverlay": "",
+"LetterCube": ""
 }
 
 [application]
