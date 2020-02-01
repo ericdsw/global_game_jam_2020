@@ -14,6 +14,8 @@ var _assigned_difficulty : int = 1
 var _lifetime := 0.0
 var _is_active := false
 
+onready var timer_clock = get_node("TimerClock")
+
 signal success(time_left)
 signal failure()
 
@@ -22,6 +24,7 @@ signal failure()
 func _process(delta: float) -> void:
 	if _is_active:
 		_lifetime -= delta
+		timer_clock.display_time(_lifetime)
 		if _lifetime <= 0.0:
 			on_failure()
 
@@ -38,6 +41,7 @@ func start(difficulty := 1) -> void:
 	_assigned_difficulty = difficulty
 	_lifetime = duration
 	_is_active = true
+	timer_clock.set_max_time(_lifetime)
 
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer
