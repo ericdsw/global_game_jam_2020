@@ -1,7 +1,7 @@
 extends BaseMinigame
 
 onready var marriage_button_scene : PackedScene = load("res://Screens/Minigames/BrokenMarriage/Buttons/MarriageButton.tscn")
-var wrong_options : Array = ["HIT HER", "DIVORCE", "TAKE THE NINTENDO WII"]
+var wrong_options : Array = ["FIGHT EACH OTHER", "DIVORCE", "TAKE THE NINTENDO WII", "DON'T LISTEN", "IGNORE", "RUN AWAY","ABSCOND"]
 
 func start(difficulty := 1) -> void:
 	.start(difficulty)
