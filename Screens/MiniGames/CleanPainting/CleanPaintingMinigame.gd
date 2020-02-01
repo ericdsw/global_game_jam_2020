@@ -9,6 +9,7 @@ var _click_area : Area2D
 func start(difficulty :=1) -> void:
 	.start(difficulty)
 	_spawn_dirt(3)
+	timer_clock.set_max_time(_lifetime)
 
 func _input(_event : InputEvent) -> void:
 	if _event.is_action("click") and !_event.is_echo():
@@ -20,10 +21,6 @@ func _input(_event : InputEvent) -> void:
 			if _click_area != null:
 				_click_area.queue_free()
 				_click_area = null
-	pass
-
-func _process(delta) -> void:
-	
 	pass
  
 func _choose_random_sprite_position(_dirt : Sprite) -> void:
@@ -37,10 +34,14 @@ func _choose_random_sprite_position(_dirt : Sprite) -> void:
 func _spawn_dirt(_amount : int = 1) -> void:
 		for i in range (0, _amount):
 			var _dirt : Sprite = dirt_scene.instance()
+			_dirt.connect("ruined_painting", self, "on_failure")
 			add_child(_dirt)
 			_choose_random_sprite_position(_dirt)
-			
+		
+		_calculate_game_duration(_amount)
+
+func _calculate_game_duration(_amount : int = 1):
+	_lifetime = _amount * 1.3
 
 func _clean_dirt() -> void:
-	
 	print("clean")

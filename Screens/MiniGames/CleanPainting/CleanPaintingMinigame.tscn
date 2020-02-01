@@ -6,7 +6,6 @@
 
 [node name="CleanPaintingMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-duration = 60.0
 
 [node name="Painting" type="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )

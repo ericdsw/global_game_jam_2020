@@ -1,10 +1,43 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/CleanPainting/Dirt.png" type="Texture" id=1]
 [ext_resource path="res://Screens/MiniGames/CleanPainting/Dirt.gd" type="Script" id=2]
+[ext_resource path="res://Resources/CleanPainting/Scratch.png" type="Texture" id=3]
+[ext_resource path="res://Resources/CleanPainting/Cheer.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.4003
+
+[sub_resource type="Animation" id=3]
+resource_name = "cleaned"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ), null ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "ruin"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
 
 [node name="Dirt" type="Sprite"]
 position = Vector2( -230.087, -155.445 )
@@ -19,5 +52,9 @@ script = ExtResource( 2 )
 ]]
 position = Vector2( -2.7309, 4.84622 )
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/cleaned = SubResource( 3 )
+anims/ruin = SubResource( 2 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
