@@ -5,6 +5,7 @@
 
 [node name="InstructionsOverlay" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+exit_type = 4
 
 [node name="Label" type="Label" parent="." index="3"]
 margin_top = 2.0

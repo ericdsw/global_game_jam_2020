@@ -9,27 +9,14 @@ minigames = [ "res://Screens/MiniGames/RandomMinigame.tscn", "res://Screens/Mini
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="StartButton" type="Button" parent="."]
-margin_left = -43.7381
-margin_top = 24.361
-margin_right = 39.2619
-margin_bottom = 44.361
-text = "Start Game"
+[node name="MainMenuWrapper" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Credits" type="Button" parent="."]
-margin_left = -43.7381
-margin_top = 69.361
-margin_right = 39.2619
-margin_bottom = 89.361
-text = "Credits"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="."]
+[node name="GameName" type="Label" parent="MainMenuWrapper"]
 margin_left = -39.6007
 margin_top = -123.531
 margin_right = 40.3993
@@ -39,7 +26,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="StartButton" type="Button" parent="MainMenuWrapper"]
+margin_left = -43.7381
+margin_top = 24.361
+margin_right = 39.2619
+margin_bottom = 44.361
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="Button" parent="MainMenuWrapper"]
+margin_left = -43.7381
+margin_top = 69.361
+margin_right = 39.2619
+margin_bottom = 89.361
+text = "Credits"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="OverlayNode" type="Node2D" parent="."]
 z_index = 10
-[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
-[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]
