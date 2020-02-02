@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Screens/MiniGames/PenPocket/PenPocketMinigame.gd" type="Script" id=2]
+[ext_resource path="res://Resources/PenPocket/ArmT.png" type="Texture" id=3]
+[ext_resource path="res://Resources/PenPocket/PocketT.png" type="Texture" id=4]
+[ext_resource path="res://Resources/PenPocket/BGT.png" type="Texture" id=5]
+
+[node name="PenPocketMinigame" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+duration = 60.0
+
+[node name="Background" type="Sprite" parent="." index="2"]
+texture = ExtResource( 5 )
+
+[node name="Pens" type="Node2D" parent="." index="3"]
+
+[node name="Pocket" type="Sprite" parent="." index="4"]
+position = Vector2( 2.33057, 118.856 )
+texture = ExtResource( 4 )
+
+[node name="PenPos1" type="Position2D" parent="Pocket" index="0"]
+position = Vector2( 87.6694, -28.8559 )
+
+[node name="PenPos2" type="Position2D" parent="Pocket" index="1"]
+position = Vector2( 35.6694, -28.8559 )
+
+[node name="PenPos3" type="Position2D" parent="Pocket" index="2"]
+position = Vector2( -18.3306, -28.8559 )
+
+[node name="PenPos4" type="Position2D" parent="Pocket" index="3"]
+position = Vector2( -77.3306, -28.8559 )
+
+[node name="PenUndoneY" type="Position2D" parent="." index="5"]
+position = Vector2( 90, 40 )
+
+[node name="PenDoneY" type="Position2D" parent="." index="6"]
+position = Vector2( 90, 90 )
+
+[node name="FingerUndoneY" type="Position2D" parent="." index="7"]
+position = Vector2( 90, -112 )
+
+[node name="FingerDoneY" type="Position2D" parent="." index="8"]
+position = Vector2( 90, -62 )
+
+[node name="Finger" type="Position2D" parent="." index="9"]
+position = Vector2( 228.491, -63.7417 )
+
+[node name="Arm" type="Sprite" parent="Finger" index="0"]
+position = Vector2( 209.746, 158.475 )
+texture = ExtResource( 3 )
+
+[node name="FingerTween" type="Tween" parent="." index="10"]
+[connection signal="tween_completed" from="FingerTween" to="." method="_on_FingerTween_tween_completed"]
