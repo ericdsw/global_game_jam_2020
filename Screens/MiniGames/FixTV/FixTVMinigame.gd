@@ -32,7 +32,9 @@ func _input(event : InputEvent) -> void:
 		
 		if click_counter < amount_of_clicks:
 			anim_player.stop()
-			anim_player.play("bad_hit")
+			var t_a : Array = ["bad_hit_1", "bad_hit_2"]
+			t_a.shuffle()
+			anim_player.play(t_a[0])
 		elif click_counter == amount_of_clicks:
 			rest_timer.start()
 			anim_player.stop()
@@ -74,6 +76,7 @@ func _set_rest_timeout(_timeout : float = 0.5) -> void:
 
 # Connected via UI
 func _on_RestTimer_timeout() -> void:
+	anim_player.play("clean")
 	on_success()
 
 func on_success() -> void:
@@ -92,3 +95,7 @@ func _on_ArmTween_tween_completed(object : Object, key : String) -> void:
 
 func _on_FootTween_tween_completed(object : Object, key : String) -> void:
 	request_shake(3.0 , 0.1)
+
+func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
+	if anim_name == "bad_hit_1" or anim_name == "bad_hit_2":
+		anim_player.play("idle")
