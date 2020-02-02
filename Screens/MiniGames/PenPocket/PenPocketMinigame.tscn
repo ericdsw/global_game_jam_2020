@@ -47,7 +47,7 @@ position = Vector2( 90, -62 )
 position = Vector2( 228.491, -63.7417 )
 
 [node name="Arm" type="Sprite" parent="Finger" index="0"]
-position = Vector2( 209.746, 158.475 )
+position = Vector2( 205.035, 251.13 )
 texture = ExtResource( 3 )
 
 [node name="FingerTween" type="Tween" parent="." index="10"]

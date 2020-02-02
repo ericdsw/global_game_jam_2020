@@ -16,6 +16,12 @@ onready var finger_done_y : float = get_node("FingerDoneY").global_position.y
 onready var finger : Position2D = get_node("Finger")
 onready var finger_tween : Tween = get_node("FingerTween")
 
+onready var pen_tex_1 : Texture = preload("res://Resources/PenPocket/PenT1.png")
+onready var pen_tex_2 : Texture = preload("res://Resources/PenPocket/PenT2.png")
+onready var pen_tex_3 : Texture = preload("res://Resources/PenPocket/PenT3.png")
+onready var pen_tex_4 : Texture = preload("res://Resources/PenPocket/PenT4.png")
+var pen_images_array : Array
+
 var aligned_pen_array : Array
 var misaligned_pen_array : Array
 var aligned_finger_array : Array
@@ -31,6 +37,10 @@ enum State {PRESSING, MOVING, FAILED}
 var state : int = State.MOVING
 
 func _ready():
+	pen_images_array.append(pen_tex_1)
+	pen_images_array.append(pen_tex_2)
+	pen_images_array.append(pen_tex_3)
+	pen_images_array.append(pen_tex_4)
 	_configure_arrays()
 	_spawn_pens(3)
 	_put_finger_in_next_pen()
@@ -92,6 +102,7 @@ func _put_finger_in_next_pen() -> void:
 func _spawn_undone_pen_in_pos(_pos : int = 0) -> void:
 	var pen_instance : Sprite = pen_scene.instance()
 	pen_array.append(pen_instance)
+	pen_instance.texture = pen_images_array.pop_back()
 	
 	pen_instance.global_position = Vector2(misaligned_pen_array[_pos].x, pen_undone_y)
 	$Pens.add_child(pen_instance)
@@ -99,6 +110,7 @@ func _spawn_undone_pen_in_pos(_pos : int = 0) -> void:
 func _spawn_done_pen_in_pos(_pos : int = 0) -> void:
 	var pen_instance : Sprite = pen_scene.instance()
 	pen_array.append(pen_instance)
+	pen_instance.texture = pen_images_array.pop_back()
 	
 	pen_instance.global_position = Vector2(aligned_pen_array[_pos].x, pen_done_y)
 	$Pens.add_child(pen_instance)
