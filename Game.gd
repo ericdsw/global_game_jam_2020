@@ -106,6 +106,7 @@ func _show_game_over() -> void:
 	var _game_over_inst := _score_res.instance() as BaseOverlay
 	overlay_node.add_child(_game_over_inst)
 	_game_over_inst.show_score(_score)
+	_game_over_inst.connect("retry_requested", self, "_on_retry_requested")
 
 # ================================ Callbacks ================================ #
 
@@ -139,6 +140,15 @@ func _on_minigame_failure() -> void:
 		overlay_node.add_child(_failure_ins)
 		yield(_failure_ins, "finished")
 		_go_to_next_minigame()
+
+func _on_retry_requested() -> void:
+	# Reset the score
+	_score = 0
+
+	# Enqueue the first minigame without calling `_go_to_next_offset()` to
+	# start the game.
+	var _first_minigame := load(minigames[0]).instance() as BaseMinigame
+	_enqueue_minigame(_first_minigame)
 
 func _on_minigame_request_next() -> void:
 	_go_to_next_minigame()
