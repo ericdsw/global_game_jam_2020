@@ -73,7 +73,10 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	# Show the minigame's required instruction screen
 	var _instructions = _instruction_res.instance()
 	overlay_node.add_child(_instructions)
-	_instructions.show_instruction(_minigame.instructions)
+	if _minigame.instructions == "":
+		_instructions.show_instruction("Fix it!")
+	else:
+		_instructions.show_instruction(_minigame.instructions)
 	_instructions.connect("finished", self, "_on_instructions_finished")
 
 	# Wait for the instruction screen's "peaked" signal before adding the minigame to
