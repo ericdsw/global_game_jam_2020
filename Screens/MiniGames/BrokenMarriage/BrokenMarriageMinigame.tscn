@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.gd" type="Script" id=1]
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=2]
@@ -7,9 +7,27 @@
 [ext_resource path="res://Resources/FixMarriage/PsychT.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sounds/FixingMarriage/TheyTalk.wav" type="AudioStream" id=6]
 
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Leg:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 1.7, 1.9, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 5.0, -5.0, 0.0 ]
+}
+
 [node name="BrokenMarriageMinigame" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 duration = 3.0
+instructions = "FIX THEIR MARRIAGE!"
 
 [node name="Background" type="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )
@@ -18,10 +36,47 @@ texture = ExtResource( 3 )
 position = Vector2( 253.542, 20.88 )
 texture = ExtResource( 5 )
 
-[node name="Leg" type="Sprite" parent="." index="4"]
-position = Vector2( -56.5356, 197.185 )
-texture = ExtResource( 4 )
+[node name="LegAnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "default"
+anims/default = SubResource( 1 )
 
-[node name="CoupleSpeech" type="AudioStreamPlayer" parent="." index="5"]
+[node name="Leg" type="Sprite" parent="." index="5"]
+position = Vector2( 60, 145 )
+texture = ExtResource( 4 )
+offset = Vector2( -100, 50 )
+
+[node name="CoupleSpeech" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 6 )
 volume_db = -15.0
+
+[node name="PossiblePositions" type="Node2D" parent="." index="7"]
+
+[node name="Position2D" type="Position2D" parent="PossiblePositions" index="0"]
+position = Vector2( -461.344, -252.621 )
+
+[node name="Position2D2" type="Position2D" parent="PossiblePositions" index="1"]
+position = Vector2( -312.85, -164.154 )
+
+[node name="Position2D3" type="Position2D" parent="PossiblePositions" index="2"]
+position = Vector2( -159.203, -246.672 )
+
+[node name="Position2D4" type="Position2D" parent="PossiblePositions" index="3"]
+position = Vector2( -192.946, 181.482 )
+
+[node name="Position2D5" type="Position2D" parent="PossiblePositions" index="4"]
+position = Vector2( -444.621, -63.9254 )
+
+[node name="Position2D6" type="Position2D" parent="PossiblePositions" index="5"]
+position = Vector2( -240.053, 31.0121 )
+
+[node name="Position2D7" type="Position2D" parent="PossiblePositions" index="6"]
+position = Vector2( -157.194, -127.405 )
+
+[node name="Position2D8" type="Position2D" parent="PossiblePositions" index="7"]
+position = Vector2( 84.3776, -262.013 )
+
+[node name="Position2D9" type="Position2D" parent="PossiblePositions" index="8"]
+position = Vector2( 56, 16 )
+
+[node name="Position2D10" type="Position2D" parent="PossiblePositions" index="9"]
+position = Vector2( -425.495, 151.054 )
