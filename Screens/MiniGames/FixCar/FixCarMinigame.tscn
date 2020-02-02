@@ -12,7 +12,7 @@
 [ext_resource path="res://Resources/Sounds/FixCar/KickCar.wav" type="AudioStream" id=10]
 [ext_resource path="res://Resources/Sounds/FixCar/PoliceSiren.wav" type="AudioStream" id=11]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "start"
 length = 2.0
 tracks/0/type = "value"
@@ -64,8 +64,7 @@ tracks/3/keys = {
 "values": [ 0.0, 0.0, 1000.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "default"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
@@ -79,7 +78,7 @@ tracks/0/keys = {
 "values": [ null ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -95,7 +94,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 7 ), ExtResource( 8 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.2
 step = 0.02
 tracks/0/type = "value"
@@ -138,15 +137,15 @@ texture = ExtResource( 4 )
 
 [node name="CarAnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 playback_speed = 2.0
-anims/start = SubResource( 4 )
+anims/start = SubResource( 1 )
 
 [node name="Lights" type="Sprite" parent="." index="4"]
 position = Vector2( -284.179, 1.89453 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lights" index="0"]
 autoplay = "default"
-anims/default = SubResource( 1 )
-anims/flash = SubResource( 2 )
+anims/default = SubResource( 2 )
+anims/flash = SubResource( 3 )
 
 [node name="Leg" type="Sprite" parent="." index="5"]
 position = Vector2( 130, 185 )
@@ -154,7 +153,7 @@ rotation = 1.62316
 texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Leg" index="0"]
-anims/kick = SubResource( 3 )
+anims/kick = SubResource( 4 )
 
 [node name="Thief" type="Sprite" parent="." index="6"]
 position = Vector2( 149.954, 132.259 )
@@ -166,7 +165,6 @@ one_shot = true
 
 [node name="KickCar" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 10 )
-volume_db = -20.0
 
 [node name="CarEngine" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 9 )
@@ -174,5 +172,4 @@ volume_db = 4.0
 
 [node name="PoliceSirens" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource( 11 )
-volume_db = -30.0
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Sounds/BGM/LEGO Racers Soundtrack - Menu (1080p).wav" type="AudioStream" id=3]
 [ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/LifeContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=6]
@@ -75,7 +76,7 @@ tracks/4/keys = {
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn" ]
+minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn", "res://Screens/MiniGames/PenPocket/PenPocketMinigame.tscn" ]
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 
@@ -88,6 +89,7 @@ __meta__ = {
 }
 
 [node name="GameName" type="Label" parent="MainMenuWrapper"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = -0.0147766
 anchor_right = -0.0147766
 margin_left = -277.409
@@ -102,11 +104,15 @@ __meta__ = {
 }
 
 [node name="StartButton" parent="MainMenuWrapper" instance=ExtResource( 4 )]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 100.0
+margin_bottom = 170.0
 text = "Start Game"
 
 [node name="Credits" parent="MainMenuWrapper" instance=ExtResource( 4 )]
-margin_top = 160.0
-margin_bottom = 230.0
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 210.0
+margin_bottom = 280.0
 text = "Credits"
 
 [node name="OverlayNode" type="Node2D" parent="."]
@@ -124,5 +130,10 @@ margin_left = -479.956
 margin_top = -271.923
 margin_right = 44.0443
 margin_bottom = -221.923
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
 [connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
