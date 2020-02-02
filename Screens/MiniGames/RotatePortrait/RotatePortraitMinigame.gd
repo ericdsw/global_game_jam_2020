@@ -14,7 +14,8 @@ var leeway : float = 0.5
 
 func _ready() -> void:
 	randomize()
-	var _rand_starting_rotation = rand_range(-60, 60)
+	var _possible_values = [-30, 30]
+	var _rand_starting_rotation = _possible_values[randi() % 2]
 	portrait.rotation_degrees = _rand_starting_rotation
 	shadow.rotation_degrees = _rand_starting_rotation
 
