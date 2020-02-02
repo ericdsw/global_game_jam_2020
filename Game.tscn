@@ -1,16 +1,17 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=3]
 [ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/LifeContainer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
-size = 48
+size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=3]

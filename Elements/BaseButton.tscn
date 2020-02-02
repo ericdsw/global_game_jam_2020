@@ -1,9 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=1]
-[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
+size = 32
 font_data = ExtResource( 2 )
 
 [node name="StartButton" type="Button"]
@@ -17,7 +18,7 @@ custom_styles/pressed = ExtResource( 1 )
 custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Start Game"
 __meta__ = {
 "_edit_use_anchors_": false

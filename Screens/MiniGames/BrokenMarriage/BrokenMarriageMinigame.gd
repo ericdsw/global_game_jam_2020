@@ -1,7 +1,15 @@
 extends BaseMinigame
 
 onready var marriage_button_scene : PackedScene = load("res://Screens/Minigames/BrokenMarriage/Buttons/MarriageButton.tscn")
-var wrong_options : Array = ["FIGHT EACH OTHER", "DIVORCE", "TAKE THE NINTENDO WII", "DON'T LISTEN", "IGNORE", "RUN AWAY","ABSCOND"]
+var wrong_options : Array = [
+	"FIGHT EACH OTHER", 
+	"DIVORCE", 
+	"TAKE THE NINTENDO WII", 
+	"DON'T LISTEN", 
+	"IGNORE", 
+	"RUN AWAY",
+	"ABSCOND"
+]
 
 func start(difficulty := 1) -> void:
 	.start(difficulty)
@@ -13,7 +21,8 @@ func _choose_random_button_position(_button : Button) -> void:
 	var fix_marriage_button_size = _button.rect_size 
 	_button.rect_global_position = Vector2(
 		rand_range(-viewport.x / 2.0, viewport.x / 2.0 - fix_marriage_button_size.x), 
-		rand_range(-viewport.y / 2.0, viewport.y / 2.0 - fix_marriage_button_size.y))
+		rand_range(-viewport.y / 2.0, 0.0) #viewport.y / 2.0 - fix_marriage_button_size.y)
+	)
 
 func _spawn_buttons(_amount : int = 2) -> void:
 	for i in range(0, _amount):

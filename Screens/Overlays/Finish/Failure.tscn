@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Screens/Overlays/BaseOverlay.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 48
+size = 84
 font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=2]
@@ -43,9 +43,9 @@ color = Color( 0.196078, 0.0470588, 0.0470588, 1 )
 
 [node name="Label" type="Label" parent="." index="3"]
 margin_left = 386.715
-margin_top = 276.535
+margin_top = 260.535
 margin_right = 637.715
-margin_bottom = 334.535
+margin_bottom = 344.535
 custom_fonts/font = SubResource( 1 )
 text = "FAILURE"
 __meta__ = {
