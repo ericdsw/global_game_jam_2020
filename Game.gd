@@ -62,8 +62,7 @@ func _go_to_next_minigame() -> void:
 	_current_minigame_offset += 1
 	if _current_minigame_offset >= _reserved_minigames.size():
 		_inject_new_minigame_set()
-#		_game_finished()
-#	else:
+	
 	var _minigame_scene := load(_reserved_minigames[_current_minigame_offset]) as PackedScene
 	var _minigame := _minigame_scene.instance() as BaseMinigame
 	_enqueue_minigame(_minigame)
@@ -131,7 +130,9 @@ func _inject_new_minigame_set() -> void:
 	var _duplicate_minigames := minigames.duplicate()
 	randomize()
 	_duplicate_minigames.shuffle()
-	_reserved_minigames += _duplicate_minigames
+	for minigame in _duplicate_minigames:
+		_reserved_minigames.append(minigame)
+	print("foo")
 
 func _substract_life() -> void:
 	_lives -= 1
@@ -178,6 +179,7 @@ func _on_retry_requested() -> void:
 	
 	_lives = 3
 	_score = 0
+	_current_minigame_offset = 0
 	
 	_reserved_minigames.clear()
 	_inject_new_minigame_set()
