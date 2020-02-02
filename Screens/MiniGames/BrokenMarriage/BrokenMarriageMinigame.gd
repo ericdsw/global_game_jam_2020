@@ -17,7 +17,8 @@ var wrong_options : Array = [
 	"TOPPLE THE MONARCHY",
 	"ESTABLISH COMMUNISM",
 	"DO A REACTION VIDEO",
-	"ALEXA, PLAY DESPACITO"
+	"ALEXA, PLAY DESPACITO",
+	"BLAME THE KIDS"
 ]
 
 var buttons := []
@@ -79,12 +80,14 @@ func _pressed_correct_button() -> void:
 	$Award/AnimationPlayer.play("success")
 	_fade_all()
 	on_success()
+	$SuccessPlayer.play()
 
 func _pressed_wrong_button() -> void:
 	couple_speech_pattern.stop()
 	$Award/AnimationPlayer.play("failure")
 	_fade_all()
 	on_failure()
+	$FailurePlayer.play()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	yield(get_tree().create_timer(1.2), "timeout")

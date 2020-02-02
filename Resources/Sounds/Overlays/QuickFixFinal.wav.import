@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/QuickFixFinal.wav-bb39069a74d4a06af2ba939c48f36cb6.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/Overlays/QuickFixFinal.wav"
+dest_files=[ "res://.import/QuickFixFinal.wav-bb39069a74d4a06af2ba939c48f36cb6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -191,6 +191,7 @@ one_shot = true
 
 [node name="KickCar" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 10 )
+volume_db = -20.0
 
 [node name="CarEngine" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 9 )

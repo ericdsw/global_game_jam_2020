@@ -23,13 +23,7 @@ func _start_display_logic() -> void:
 	rect_position = IN_POS + _direction
 	modulate.a = 1.0
 	_fully_displayed()
-	
-#	tween.interpolate_property(
-#		self, "rect_position", IN_POS + _direction * 1000.0, IN_POS, 0.2, 
-#		Tween.TRANS_SINE, Tween.EASE_IN_OUT
-#	)
-#	tween.interpolate_property(
-#		self, "modulate:a", 0.0, 1.0, 0.2,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
-#	)
-#	tween.start()
+	$EnterSoundPlayer.play()
+
+func _on_EnterSoundPlayer_finished() -> void:
+	$QuickFixSoundPlayer.play()
