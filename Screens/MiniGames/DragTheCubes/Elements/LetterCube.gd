@@ -44,13 +44,14 @@ func move_to(pos: Vector2) -> void:
 
 func random_flip() -> void:
 	randomize()
-	match randi() % 3 + 1:
-		1:
-			letter_sprite.rotation_degrees = 90
-		2:
-			letter_sprite.rotation_degrees = 180
-		3:
-			letter_sprite.rotation_degrees = 270
+	var _random_number = randi() % 10 + 1
+	
+	if _random_number <= 40:
+		letter_sprite.rotation_degrees = 90
+	elif _random_number <= 80:
+		letter_sprite.rotation_degrees = 270
+	else:
+		letter_sprite.rotation_degrees = 180
 
 func _offset_for_letter(letter: String) -> Vector2:
 	if ["A", "C", "D"].has(letter):
