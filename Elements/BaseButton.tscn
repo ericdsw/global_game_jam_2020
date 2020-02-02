@@ -1,25 +1,50 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Elements/BaseButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
 
-[node name="StartButton" type="Button"]
+[sub_resource type="Animation" id=2]
+resource_name = "pressed"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+}
+
+[node name="BaseButton" type="Button"]
 margin_left = -120.0
 margin_top = 50.0
 margin_right = 120.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 240, 70 )
+rect_scale = Vector2( 0.98, 0.98 )
+rect_pivot_offset = Vector2( 120, 35 )
 custom_styles/hover = ExtResource( 1 )
 custom_styles/pressed = ExtResource( 1 )
 custom_styles/focus = ExtResource( 1 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Start Game"
+text = "Button Text"
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/pressed = SubResource( 2 )
+[connection signal="pressed" from="." to="." method="_on_BaseButton_pressed"]
