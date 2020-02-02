@@ -13,7 +13,7 @@ var done : bool = false
 
 func _input(event : InputEvent) -> void:
 	
-	if done: return
+	if done or !_is_active : return
 	
 	if event.is_action_pressed("click"):
 		leg_kick.play()

@@ -21,7 +21,7 @@ onready var timer_clock = get_node("TimerClock")
 
 signal success(time_left)
 signal failure()
-signal request_next(data)
+signal request_next()
 signal request_shake(intensity, duration)
 
 # ================================ Lifecycle ================================ #
@@ -63,11 +63,11 @@ func on_failure() -> void:
 		_is_active = false
 		emit_signal("failure")
 
-func request_next(extra_data := {}) -> void:
+func request_next() -> void:
 	emit_signal("request_next")
 
-func request_shake(intensity := 1.0, duration := 0.5) -> void:
-	emit_signal("request_shake", intensity, duration)
+func request_shake(intensity := 1.0, shake_duration := 0.5) -> void:
+	emit_signal("request_shake", intensity, shake_duration)
 
 # ================================ Callbacks ================================ #
 

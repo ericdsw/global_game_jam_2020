@@ -20,6 +20,7 @@ var wrong_options : Array = [
 	"ALEXA, PLAY DESPACITO"
 ]
 
+var buttons := []
 var possible_positions := []
 signal all_buttons_displayed()
 
@@ -58,7 +59,7 @@ func _spawn_buttons(_amount : int = 2) -> void:
 	
 	emit_signal("all_buttons_displayed")
 
-func _add_button(text : String, is_correct := false) -> MarriageButton:
+func _add_button(text : String, is_correct := false) -> void:
 	var _button : MarriageButton = marriage_button_scene.instance()
 	_button.text = text
 	if is_correct:
@@ -67,12 +68,18 @@ func _add_button(text : String, is_correct := false) -> MarriageButton:
 		_button.connect("pressed", self, "_pressed_wrong_button")
 	add_child(_button)
 	_choose_random_button_position(_button)
-	return _button
+	buttons.append(_button)
+
+func _fade_all() -> void:
+	for button in buttons:
+		button.request_fade_out()
 
 func _pressed_correct_button() -> void:
 	couple_speech_pattern.stop()
+	_fade_all()
 	on_success()
 
 func _pressed_wrong_button() -> void:
 	couple_speech_pattern.stop()
+	_fade_all()
 	on_failure()
