@@ -4,7 +4,7 @@ const CUBE_PATH := "res://Screens/Minigames/DragTheCubes/Elements/LetterCube.tsc
 const POSSIBLE_LETTERS := ["A", "B", "C", "D"]
 
 var _cubes := []
-
+var _random_flip := 0
 var _correctly_ordered_letters := []
 var _selected_letters := []
 var _random_generator := RandomNumberGenerator.new()
@@ -18,10 +18,6 @@ var _performing_swap := false
 var _offset_to_cur_cube := Vector2()
 
 # ================================ Lifecycle ================================ #
-
-func _ready() -> void:
-	_random_generator.randomize()
-	_select_letters()
 
 func _process(_delta: float) -> void:
 	
@@ -68,6 +64,10 @@ func _input(event: InputEvent) -> void:
 func start(difficulty := 1) -> void:
 	.start(difficulty)
 	
+	_random_generator.randomize()
+	_select_letters(difficulty)
+	
+	var _flipped := 0
 	for i in range(_selected_letters.size()):
 		
 		var _cube = load(CUBE_PATH).instance()
@@ -79,6 +79,13 @@ func start(difficulty := 1) -> void:
 		_cube.position.y += _random_generator.randi_range(0, 30)
 		add_child(_cube)
 		_cube.show_letter(_selected_letters[i])
+		
+		if _flipped < _random_flip:
+			_random_generator.randomize()
+			if _random_generator.randi_range(0,1) == 0:
+				_cube.random_flip()
+				_flipped += 1
+		
 		_cubes.append(_cube)
 
 func _check_change() -> void:
@@ -105,45 +112,24 @@ func _check_change() -> void:
 				on_failure()
 				return
 		on_success()
+
+func _select_letters(for_difficulty: int) -> void:
 	
-#	var areas := _current_cube.detection_area.get_overlapping_areas()
-#	if areas.empty():
-#		_current_cube.move_to(_original_cube_position)
-#	else:
-#		var _cube_to_swap = null
-#		for area in areas:
-#			if _cube_to_swap == null:
-#				_cube_to_swap = area.get_parent()
-#			else:
-#				var _cur_cube := area.get_parent() as LetterCube
-#				var _check_pos := _current_cube.global_position
-#				var _cur_dist : int = _cur_cube.global_position.distance_to(_check_pos)
-#				var _swap_dist : int = _cube_to_swap.global_position.distance_to(_check_pos)
-#
-#				if _cur_dist < _swap_dist:
-#					_cube_to_swap = _cur_cube
-		
-#		_current_cube.move_to(_cube_to_swap.global_position)
-#		_cube_to_swap.move_to(_original_cube_position)
-#		_performing_swap = true
-#
-#		yield(_current_cube, "finished_movement")
-#		_swap_cubes(
-#			_selected_letters.find(_current_cube.assigned_letter),
-#			_selected_letters.find(_cube_to_swap.assigned_letter)
-#		)
-#
-#		for i in range(0, _correctly_ordered_letters.size()):
-#			if _correctly_ordered_letters[i] != _selected_letters[i]:
-#				on_failure()
-#				return
-#		on_success()
-
-func _select_letters() -> void:
-
-	_selected_letters = POSSIBLE_LETTERS.duplicate(true)
-	_correctly_ordered_letters = POSSIBLE_LETTERS.duplicate(true)
-
+	_random_flip = 0
+	match for_difficulty:
+		1:
+			_random_flip = 0
+			_selected_letters = ["A", "B", "C"]
+		2:
+			_random_flip = 2
+			_selected_letters = ["A", "B", "C", "D"]
+		_:
+			_random_flip = 4
+			_selected_letters = ["A", "B", "C", "D", "E"]
+	
+	_correctly_ordered_letters = _selected_letters.duplicate(true)
+	
+	_random_generator.randomize()
 	var _rand_change_pair_1 = _random_generator.randi_range(0, _selected_letters.size() - 1)
 	var _rand_change_pair_2 = _random_generator.randi_range(0, _selected_letters.size() - 1)
 	while _rand_change_pair_1 == _rand_change_pair_2:

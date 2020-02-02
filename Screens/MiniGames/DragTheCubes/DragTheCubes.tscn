@@ -7,7 +7,7 @@
 [node name="DragTheCubes" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 3.0
-instructions = "DRAG!!!"
+instructions = "DRAG TO ORDER!"
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )

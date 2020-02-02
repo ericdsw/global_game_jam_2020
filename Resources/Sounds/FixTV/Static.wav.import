@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Static.wav-b21dc3484a3c261d7772bb2f7cd23bff.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/FixTV/Static.wav"
+dest_files=[ "res://.import/Static.wav-b21dc3484a3c261d7772bb2f7cd23bff.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
