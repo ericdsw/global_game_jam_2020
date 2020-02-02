@@ -3,15 +3,19 @@ extends BaseMinigame
 onready var dirt_scene : PackedScene = load("res://Screens/MiniGames/CleanPainting/Dirt.tscn")
 onready var painting : Sprite = get_node("Painting")
 onready var click_area_scene : PackedScene = load("res://Screens/MiniGames/CleanPainting/MouseHitbox.tscn")
-
+onready var clean_sound_play : AudioStreamPlayer = get_node("CleaningSound")
 var _click_area : Area2D
 
-export var dirt_amount : int = 3
+onready var sparkle : AudioStreamPlayer = get_node("SparkleSound")
+onready var rip : AudioStreamPlayer = get_node("RipSound")
+
+export var dirt_amount : int 
 
 var cleaned_dirt : int = 0
 
-func start(difficulty :=1) -> void:
+func start(difficulty := 1) -> void:
 	.start(difficulty)
+	dirt_amount = 1 + difficulty
 	_spawn_dirt(dirt_amount)
 	timer_clock.set_max_time(_lifetime)
 
@@ -21,8 +25,10 @@ func _input(_event : InputEvent) -> void:
 			_click_area = click_area_scene.instance()
 			_click_area.global_position = get_global_mouse_position()
 			add_child(_click_area)
+			clean_sound_play.play()
 		else:
 			if _click_area != null:
+				clean_sound_play.stop()
 				_click_area.queue_free()
 				_click_area = null
 	pass
@@ -40,6 +46,7 @@ func _spawn_dirt(_amount : int = 1) -> void:
 			var _dirt : Sprite = dirt_scene.instance()
 			_dirt.connect("ruined_painting", self, "on_failure")
 			_dirt.connect("cleaned", self, "_cleaned_one_dirt")
+			_dirt.connect("ruined_painting", self, "_play_rip_sound", [], 4)
 			add_child(_dirt)
 			_choose_random_sprite_position(_dirt)
 		
@@ -53,8 +60,11 @@ func _clean_dirt() -> void:
 
 func _cleaned_one_dirt() -> void:
 	
-	print("cleaned a dirty thing")
+	sparkle.play()
 	cleaned_dirt += 1
 	
 	if cleaned_dirt >= dirt_amount:
 		on_success()
+
+func _play_rip_sound() -> void:
+	rip.play()
