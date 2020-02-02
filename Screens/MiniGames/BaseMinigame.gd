@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 		_lifetime -= delta
 		timer_clock.display_time(_lifetime)
 		if _lifetime <= 0.0:
+			timer_clock.play_timeout_song()
 			on_failure()
 
 # ================================= Public ================================== #
@@ -47,6 +48,7 @@ func start(difficulty := 1) -> void:
 	_lifetime = duration
 	_is_active = true
 	timer_clock.set_max_time(_lifetime)
+	timer_clock.play_time_sound()
 
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer
@@ -54,6 +56,7 @@ func on_success() -> void:
 	if _is_active:
 		_is_active = false
 		emit_signal("success", _lifetime)
+	timer_clock.stop_time_sound()
 
 # Call this methid if the minigame's fail condition is met. Note that this method
 # will be automatically called when the deadline timer runs out, so subclasses
@@ -62,6 +65,7 @@ func on_failure() -> void:
 	if _is_active:
 		_is_active = false
 		emit_signal("failure")
+	timer_clock.stop_time_sound()
 
 func request_next() -> void:
 	emit_signal("request_next")

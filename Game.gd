@@ -193,4 +193,4 @@ func _on_minigame_requested_shake(intensity: float, duration: float) -> void:
 	get_node("Camera2D").shake(intensity, duration)
 
 func _on_AudioStreamPlayer_finished() -> void:
-	$AudioStreamPlayer.play()
+	$BGMPlayer.play()
