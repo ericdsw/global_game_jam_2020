@@ -38,7 +38,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 3 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "bad_hit_1"
 length = 0.2
 step = 0.01
@@ -55,7 +55,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), null, ExtResource( 15 ), ExtResource( 14 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 resource_name = "bad_hit_2"
 length = 0.2
 step = 0.01
@@ -72,7 +72,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 17 ), null, ExtResource( 15 ), ExtResource( 19 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 resource_name = "clean"
 length = 0.9
 loop = true
@@ -114,8 +114,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "good_hit"
+[sub_resource type="Animation" id=5]
 length = 0.1
 step = 0.01
 tracks/0/type = "value"
@@ -131,7 +130,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 16 ), ExtResource( 18 ), null ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "idle"
 length = 0.04
 loop = true
@@ -149,8 +148,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 15 ), ExtResource( 17 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "flicker"
+[sub_resource type="Animation" id=7]
 length = 0.08
 loop = true
 step = 0.04
@@ -182,7 +180,7 @@ tracks/1/keys = {
 [node name="FixTVMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 3.0
-no_overlay_for_fail = true
+no_overlay_for_success = true
 
 [node name="Background" type="Sprite" parent="." index="1"]
 texture = ExtResource( 6 )
@@ -193,11 +191,11 @@ position = Vector2( 0, -39 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TV" index="0"]
 autoplay = "idle"
 anims/bad_hit = SubResource( 1 )
-anims/bad_hit_1 = SubResource( 4 )
-anims/bad_hit_2 = SubResource( 8 )
-anims/clean = SubResource( 6 )
-anims/good_hit = SubResource( 2 )
-anims/idle = SubResource( 7 )
+anims/bad_hit_1 = SubResource( 2 )
+anims/bad_hit_2 = SubResource( 3 )
+anims/clean = SubResource( 4 )
+anims/good_hit = SubResource( 5 )
+anims/idle = SubResource( 6 )
 
 [node name="PressStartButton" type="Sprite" parent="TV" index="1"]
 visible = false
@@ -222,7 +220,7 @@ texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Flicker" index="0"]
 autoplay = "flicker"
-anims/flicker = SubResource( 3 )
+anims/flicker = SubResource( 7 )
 
 [node name="ArmRest" type="Position2D" parent="." index="7"]
 position = Vector2( -792.304, -37.8414 )

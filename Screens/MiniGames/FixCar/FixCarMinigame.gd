@@ -6,6 +6,7 @@ onready var police_sirens := get_node("PoliceSirens") as AudioStreamPlayer
 onready var leg_player : AnimationPlayer = get_node("Leg/AnimationPlayer")
 onready var lights_player : AnimationPlayer = get_node("Lights/AnimationPlayer")
 onready var end_timer : Timer = get_node("EndTimer")
+onready var car_animator : AnimationPlayer = get_node("CarAnimationPlayer")
 
 var amount_of_clicks : int = 5
 var click_counter : int = 0
@@ -25,6 +26,14 @@ func _input(event : InputEvent) -> void:
 			car_engine_start.play()
 			on_success()
 
+
+func on_success() -> void:
+	.on_success()
+	car_engine_start.play()
+	car_animator.play("start")
+	end_timer.start()
+
+# @Overwrite
 func on_failure() -> void:
 	police_sirens.play()
 	lights_player.play("flash")

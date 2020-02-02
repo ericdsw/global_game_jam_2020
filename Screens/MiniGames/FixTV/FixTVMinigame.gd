@@ -79,21 +79,26 @@ func _on_RestTimer_timeout() -> void:
 	anim_player.play("clean")
 	on_success()
 
+# @Overwrite
 func on_success() -> void:
 	rest_timer.stop()
 	win_sound_play.play()
 	done = true
 	.on_success()
 
+	yield(get_tree().create_timer(1.0), "timeout")
+	request_next()
+
+# @Overwrite
 func on_failure() -> void:
 	rest_timer.stop()
 	done = true
 	.on_failure()
 
-func _on_ArmTween_tween_completed(object : Object, key : String) -> void:
+func _on_ArmTween_tween_completed(_object : Object, _key : String) -> void:
 	request_shake(3.0, 0.1)
 
-func _on_FootTween_tween_completed(object : Object, key : String) -> void:
+func _on_FootTween_tween_completed(_object : Object, _key : String) -> void:
 	request_shake(3.0 , 0.1)
 
 func _on_AnimationPlayer_animation_finished(anim_name : String) -> void:
