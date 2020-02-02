@@ -19,6 +19,7 @@ func set_incorrect() -> void:
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
 	if area.is_in_group("BreakerClickArea"):
+		$ClickPlayer.play()
 		if !_correct:
 			set_correct()
 		else:

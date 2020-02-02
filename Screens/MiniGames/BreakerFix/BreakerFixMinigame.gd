@@ -20,7 +20,7 @@ const HARD_AMOUNT := {
 
 onready var left_container := get_node("LeftBreakerContainer") as VBoxContainer
 onready var right_container := get_node("RightBreakerContainer") as VBoxContainer
-onready var breaker_click := get_node("BreakerClick") as AudioStreamPlayer
+#onready var breaker_click := get_node("BreakerClick") as AudioStreamPlayer
 onready var electricity_grid := get_node("ElectricityGrid") as AudioStreamPlayer
 
 var _cur_amount := 0
@@ -34,7 +34,7 @@ func _input(event: InputEvent) -> void:
 		var _area = load(C_AREA).instance()
 		add_child(_area)
 		_area.global_position = get_global_mouse_position()
-		breaker_click.play()
+#		breaker_click.play()
 
 # @Overwrite
 func start(difficulty := 1) -> void:

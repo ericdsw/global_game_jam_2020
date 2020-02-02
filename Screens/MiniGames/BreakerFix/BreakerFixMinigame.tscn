@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.gd" type="Script" id=2]
-[ext_resource path="res://Resources/BreakerFix/breaker_box.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Sounds/FixBrake/BrakeSwitch.wav" type="AudioStream" id=4]
 [ext_resource path="res://Resources/Sounds/FixBrake/ElectricityON.wav" type="AudioStream" id=5]
+[ext_resource path="res://Resources/BreakerFix/BGT.png" type="Texture" id=6]
 
 [node name="BreakerFixMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 3.0
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
-texture = ExtResource( 3 )
+[node name="Background" type="Sprite" parent="." index="0"]
+texture = ExtResource( 6 )
 
 [node name="LeftBreakerContainer" type="VBoxContainer" parent="." index="2"]
 margin_left = -116.0
@@ -38,10 +37,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BreakerClick" type="AudioStreamPlayer" parent="." index="5"]
-stream = ExtResource( 4 )
-pitch_scale = 2.0
-
-[node name="ElectricityGrid" type="AudioStreamPlayer" parent="." index="6"]
+[node name="ElectricityGrid" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 5 )
 volume_db = -20.0
