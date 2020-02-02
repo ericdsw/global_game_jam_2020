@@ -130,7 +130,6 @@ position = Vector2( 247.542, 35.88 )
 texture = ExtResource( 5 )
 
 [node name="Award" type="Sprite" parent="." index="6"]
-visible = false
 position = Vector2( -174.406, -550.16 )
 texture = ExtResource( 8 )
 

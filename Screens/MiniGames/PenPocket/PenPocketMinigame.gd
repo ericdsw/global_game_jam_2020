@@ -66,6 +66,7 @@ func start(difficulty := 1) -> void:
 	_put_finger_in_next_pen()
 
 func on_failure() -> void:
+	print("failure of pen pocket")
 	.on_failure()
 	$OofPlayer.play()
 	

@@ -76,19 +76,25 @@ func _fade_all() -> void:
 		button.request_fade_out()
 
 func _pressed_correct_button() -> void:
+	on_success()
+
+func on_success() -> void:
+	.on_success()
 	couple_speech_pattern.stop()
 	$Award/AnimationPlayer.play("success")
 	_fade_all()
-	on_success()
 	$SuccessPlayer.play()
 
 func _pressed_wrong_button() -> void:
+	on_failure()
+
+func on_failure() -> void:
+	.on_failure()
 	couple_speech_pattern.stop()
 	$Award/AnimationPlayer.play("failure")
 	_fade_all()
-	on_failure()
 	$FailurePlayer.play()
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
 	yield(get_tree().create_timer(1.2), "timeout")
 	request_next()
