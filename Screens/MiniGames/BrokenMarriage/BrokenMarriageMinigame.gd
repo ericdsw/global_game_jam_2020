@@ -91,5 +91,4 @@ func _pressed_wrong_button() -> void:
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	yield(get_tree().create_timer(1.2), "timeout")
-	
 	request_next()

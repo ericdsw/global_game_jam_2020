@@ -50,7 +50,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GlobalGameJam_2020"
+config/name="QuickFix"
+config/description="Quix Fix!"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 

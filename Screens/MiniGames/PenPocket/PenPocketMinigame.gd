@@ -84,12 +84,15 @@ func on_success() -> void:
 	thumbs_up_tween.start()
 
 func _process(delta : float) -> void:
+	
+	if !_is_active: return
+	
 	if state == State.PRESSING:
 		if Input.is_action_pressed("click"):
 			pen_array[current_pen].global_position.y += units_per_second * delta
 			finger.global_position.y += units_per_second * delta
 		if Input.is_action_just_released("click"):
-			if abs(pen_array[current_pen].global_position.y - pen_done_y) <= leeway:
+			if abs(pen_array[current_pen].global_position.y - pen_done_y) < leeway:
 				pen_array[current_pen].global_position = aligned_pen_array[current_pen]
 				finger.global_position = aligned_finger_array[current_pen]
 				_put_finger_in_next_pen()
