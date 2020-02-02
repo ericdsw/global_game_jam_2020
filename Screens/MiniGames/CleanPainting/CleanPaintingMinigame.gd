@@ -45,11 +45,10 @@ func _input(_event : InputEvent) -> void:
  
 func _choose_random_sprite_position(_dirt : Sprite) -> void:
 	randomize()
-	var view_painting : Vector2 = Vector2(painting.texture.get_width(), painting.texture.get_height())
-	var view_dirt : Vector2 = Vector2(_dirt.texture.get_width(), _dirt.texture.get_height())
-	_dirt.global_position = Vector2(
-		rand_range(-view_painting.x /2.0, view_painting.x /2.0 -view_dirt.x),
-		rand_range(-view_painting.y /2.0, view_painting.y /2.0 -view_dirt.y))
+	var random_x : float = rand_range($TopLeft.global_position.x, $BotRight.global_position.x)
+	var random_y : float = rand_range($TopLeft.global_position.y, $BotRight.global_position.y)
+	
+	_dirt.global_position = Vector2(random_x, random_y)
 	
 func _spawn_dirt(_amount : int = 1) -> void:
 		for i in range (0, _amount):

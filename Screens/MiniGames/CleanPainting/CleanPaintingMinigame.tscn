@@ -29,3 +29,9 @@ stream = ExtResource( 6 )
 
 [node name="RipSound" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource( 7 )
+
+[node name="TopLeft" type="Position2D" parent="." index="8"]
+position = Vector2( -138.734, -168.2 )
+
+[node name="BotRight" type="Position2D" parent="." index="9"]
+position = Vector2( 154.695, 197.666 )
