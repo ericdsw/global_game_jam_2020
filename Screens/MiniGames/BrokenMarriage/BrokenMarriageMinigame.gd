@@ -76,10 +76,17 @@ func _fade_all() -> void:
 
 func _pressed_correct_button() -> void:
 	couple_speech_pattern.stop()
+	$Award/AnimationPlayer.play("success")
 	_fade_all()
 	on_success()
 
 func _pressed_wrong_button() -> void:
 	couple_speech_pattern.stop()
+	$Award/AnimationPlayer.play("failure")
 	_fade_all()
 	on_failure()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	yield(get_tree().create_timer(1.2), "timeout")
+	
+	request_next()
