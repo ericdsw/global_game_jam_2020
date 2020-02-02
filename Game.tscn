@@ -134,7 +134,7 @@ margin_bottom = -221.923
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -19.724
+volume_db = -20.0
 autoplay = true
 
 [node name="GameOverSoundPlayer" type="AudioStreamPlayer" parent="."]

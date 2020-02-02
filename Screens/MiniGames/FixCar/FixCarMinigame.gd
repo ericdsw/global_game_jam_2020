@@ -26,6 +26,18 @@ func _input(event : InputEvent) -> void:
 			car_engine_start.play()
 			on_success()
 
+func start(difficulty := 1) -> void:
+	.start(difficulty)
+	match difficulty:
+		1:
+			amount_of_clicks = 5
+		2:
+			amount_of_clicks = 7
+			_lifetime += 0.25
+		3:
+			amount_of_clicks = 10
+			_lifetime += 0.5
+	timer_clock.set_max_time(_lifetime)
 
 func on_success() -> void:
 	.on_success()
