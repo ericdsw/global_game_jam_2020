@@ -14,6 +14,7 @@ export (Array, String, FILE) var minigames := []
 # UI references
 onready var overlay_node := get_node("OverlayNode") as Node2D
 onready var main_menu_wrapper := get_node("MainMenuWrapper") as Control
+onready var life_container := get_node("ContainerZFixer/LifeContainer") as LifeContainer
 
 # The current active minigame offset. This offset will be used to decide which
 # scene path inside the `minigames` array should be used to instance the next 
@@ -30,6 +31,9 @@ var _lives := 4
 var _cur_minigame : BaseMinigame
 
 var _reserved_minigames := []
+
+func _ready() -> void:
+	life_container.hide()
 
 # ================================= Private ================================= #
 
@@ -69,6 +73,10 @@ func _go_to_next_minigame() -> void:
 # After the transition finishes, the new minigame is started.
 func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	
+	if _lives <= 0:
+		_game_finished()
+		return
+	
 	# Perform the required minigame connections
 	_minigame.connect("success", self, "_on_miningame_succeeded")
 	_minigame.connect("failure", self, "_on_minigame_failure")
@@ -88,6 +96,7 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	# statement will wait for the "peaked" signal before continuing execution. this
 	# is known as "coroutines".
 	yield(_instructions, "peaked")
+	life_container.show()
 	if _cur_minigame != null:
 		_cur_minigame.queue_free()
 	_cur_minigame = _minigame
@@ -122,7 +131,8 @@ func _inject_new_minigame_set() -> void:
 	_reserved_minigames += _duplicate_minigames
 
 func _substract_life() -> void:
-	pass
+	_lives -= 1
+	life_container.display_available_lives(_lives)
 
 # ================================ Callbacks ================================ #
 
@@ -152,27 +162,32 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 
 # Show the failure screen
 func _on_minigame_failure() -> void:
+	
+	_substract_life()
+	
 	if !_cur_minigame.no_overlay_for_fail:
-		_substract_life()
 		var _failure_ins = _failure_res.instance()
 		overlay_node.add_child(_failure_ins)
 		yield(_failure_ins, "finished")
 		_go_to_next_minigame()
 
 func _on_retry_requested() -> void:
-	# Reset the score
+	
+	_lives = 4
 	_score = 0
-
-	# Enqueue the first minigame without calling `_go_to_next_offset()` to
-	# start the game.
-	var _first_minigame := load(minigames[0]).instance() as BaseMinigame
+	
+	_reserved_minigames.clear()
+	_inject_new_minigame_set()
+	
+	life_container.display_available_lives(_lives)
+	var _first_minigame := load(_reserved_minigames[0]).instance() as BaseMinigame
 	_enqueue_minigame(_first_minigame)
 
 func _on_minigame_request_next(_data := {}) -> void:
-	if _data.has("type"):
-		var _type = _data["type"]
-		if _type == "success":
-			_calculate_score(_data["time_left"])
-		else:
-			_substract_life()
+#	if _data.has("type"):
+#		var _type = _data["type"]
+#		if _type == "success":
+#			_calculate_score(_data["time_left"])
+#		else:
+#			_substract_life()
 	_go_to_next_minigame()

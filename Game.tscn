@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=3]
 [ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Elements/LifeContainer.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -129,5 +130,14 @@ z_index = 100
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "intro_anim"
 anims/intro_anim = SubResource( 3 )
+
+[node name="ContainerZFixer" type="Node2D" parent="."]
+z_index = 9
+
+[node name="LifeContainer" parent="ContainerZFixer" instance=ExtResource( 5 )]
+margin_left = -479.956
+margin_top = -271.923
+margin_right = 44.0443
+margin_bottom = -221.923
 [connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]

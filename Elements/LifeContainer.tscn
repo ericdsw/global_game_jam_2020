@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Elements/LifeContainer.gd" type="Script" id=2]
+[ext_resource path="res://Resources/General/life_image.png" type="Texture" id=3]
+
+[node name="LifeContainer" type="HBoxContainer"]
+margin_right = 524.0
+margin_bottom = 50.0
+custom_constants/separation = 10
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 25, 25 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 60.0
+margin_right = 110.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 25, 25 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 120.0
+margin_right = 170.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 25, 25 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_left = 180.0
+margin_right = 230.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+rect_pivot_offset = Vector2( 25, 25 )
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Tween" type="Tween" parent="."]

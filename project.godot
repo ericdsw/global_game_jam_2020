@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "LetterCube",
 "language": "GDScript",
 "path": "res://Screens/MiniGames/DragTheCubes/Elements/LetterCube.gd"
+}, {
+"base": "HBoxContainer",
+"class": "LifeContainer",
+"language": "GDScript",
+"path": "res://Elements/LifeContainer.gd"
 } ]
 _global_script_class_icons={
 "BaseMinigame": "",
 "BaseOverlay": "",
 "InstructionsOverlay": "",
-"LetterCube": ""
+"LetterCube": "",
+"LifeContainer": ""
 }
 
 [application]
