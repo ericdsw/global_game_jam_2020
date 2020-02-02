@@ -117,6 +117,7 @@ func _show_game_over() -> void:
 
 func _inject_new_minigame_set() -> void:
 	var _duplicate_minigames := minigames.duplicate()
+	randomize()
 	_duplicate_minigames.shuffle()
 	_reserved_minigames += _duplicate_minigames
 
