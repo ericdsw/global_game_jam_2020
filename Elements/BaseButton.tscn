@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Elements/BaseButton.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Sounds/Buttons/ButtonHover.wav" type="AudioStream" id=4]
+[ext_resource path="res://Resources/Sounds/Buttons/ClickButton.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -47,4 +49,11 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/pressed = SubResource( 2 )
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="ClickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+[connection signal="mouse_entered" from="." to="." method="_on_BaseButton_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_BaseButton_pressed"]
