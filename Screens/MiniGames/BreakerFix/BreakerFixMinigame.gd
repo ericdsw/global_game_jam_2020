@@ -83,3 +83,4 @@ func _on_breaker_changed(_is_correct: bool) -> void:
 	if _damaged_breakers <= 0:
 		electricity_grid.stop()
 		on_success()
+	

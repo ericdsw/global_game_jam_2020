@@ -109,7 +109,7 @@ one_shot = true
 
 [node name="KickCar" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 10 )
-volume_db = -10.0
+volume_db = -20.0
 
 [node name="CarEngine" type="AudioStreamPlayer" parent="." index="9"]
 stream = ExtResource( 9 )
@@ -117,5 +117,5 @@ volume_db = 4.0
 
 [node name="PoliceSirens" type="AudioStreamPlayer" parent="." index="10"]
 stream = ExtResource( 11 )
-volume_db = -8.0
+volume_db = -30.0
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

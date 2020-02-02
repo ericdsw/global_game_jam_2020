@@ -10,6 +10,10 @@ onready var f_i_pos : Vector2 = get_node("FootRest").global_position
 onready var f_f_pos : Vector2 = get_node("FootFinal").global_position
 onready var a_tween : Tween = get_node("ArmTween")
 onready var f_tween : Tween = get_node("FootTween")
+onready var arm_sound_play : AudioStreamPlayer = get_node("ArmSound")
+onready var foot_sound_play : AudioStreamPlayer = get_node("FootSound")
+onready var win_sound_play : AudioStreamPlayer = get_node("WinSound")
+
 
 var amount_of_clicks : int = 5
 var click_counter : int = 0
@@ -45,14 +49,18 @@ func _animate_arm_or_foot() -> void:
 	randomize()
 	if randi() % 10 + 1 < 5:
 		a_tween.stop_all()
+		arm_sound_play.stop()
 		arm.global_position = a_i_pos
 		a_tween.interpolate_property(arm, "global_position", a_i_pos, a_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		a_tween.start()
+		arm_sound_play.play()
 	else:
 		f_tween.stop_all()
+		foot_sound_play.stop()
 		foot.global_position = f_i_pos
 		f_tween.interpolate_property(foot, "global_position", f_i_pos, f_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
 		f_tween.start()
+		foot_sound_play.play()
 
 # Sets the time the player has to NOT click in order to succeed.
 # Probably a smaller time is easier.
@@ -66,6 +74,7 @@ func _on_RestTimer_timeout() -> void:
 
 func on_success() -> void:
 	rest_timer.stop()
+	win_sound_play.play()
 	done = true
 	.on_success()
 
