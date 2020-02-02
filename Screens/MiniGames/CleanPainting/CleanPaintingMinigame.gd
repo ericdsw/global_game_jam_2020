@@ -6,9 +6,13 @@ onready var click_area_scene : PackedScene = load("res://Screens/MiniGames/Clean
 
 var _click_area : Area2D
 
+export var dirt_amount : int = 3
+
+var cleaned_dirt : int = 0
+
 func start(difficulty :=1) -> void:
 	.start(difficulty)
-	_spawn_dirt(3)
+	_spawn_dirt(dirt_amount)
 	timer_clock.set_max_time(_lifetime)
 
 func _input(_event : InputEvent) -> void:
@@ -35,6 +39,7 @@ func _spawn_dirt(_amount : int = 1) -> void:
 		for i in range (0, _amount):
 			var _dirt : Sprite = dirt_scene.instance()
 			_dirt.connect("ruined_painting", self, "on_failure")
+			_dirt.connect("cleaned", self, "_cleaned_one_dirt")
 			add_child(_dirt)
 			_choose_random_sprite_position(_dirt)
 		
@@ -45,3 +50,11 @@ func _calculate_game_duration(_amount : int = 1):
 
 func _clean_dirt() -> void:
 	print("clean")
+
+func _cleaned_one_dirt() -> void:
+	
+	print("cleaned a dirty thing")
+	cleaned_dirt += 1
+	
+	if cleaned_dirt >= dirt_amount:
+		on_success()
