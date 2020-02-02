@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.gd" type="Script" id=1]
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=2]
@@ -6,10 +6,91 @@
 [ext_resource path="res://Resources/FixMarriage/LegT.png" type="Texture" id=4]
 [ext_resource path="res://Resources/FixMarriage/PsychT.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sounds/FixingMarriage/TheyTalk.wav" type="AudioStream" id=6]
+[ext_resource path="res://Resources/FixMarriage/Sofa.png" type="Texture" id=7]
+[ext_resource path="res://Resources/FixMarriage/F.png" type="Texture" id=8]
+[ext_resource path="res://Resources/FixMarriage/S.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=2]
+resource_name = "failure"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -174.406, -550.16 ), Vector2( -196.469, -64.7809 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "success"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -213.016, -62.0231 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
-length = 5.0
+length = 2.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Leg:rotation_degrees")
@@ -28,28 +109,43 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 duration = 3.0
 instructions = "MARRIAGE COUNSELING!"
+no_overlay_for_success = true
+no_overlay_for_fail = true
 
 [node name="Background" type="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )
 
-[node name="Psych" type="Sprite" parent="." index="3"]
-position = Vector2( 253.542, 20.88 )
-texture = ExtResource( 5 )
+[node name="Sofa" type="Sprite" parent="." index="3"]
+position = Vector2( -193.048, 44.1253 )
+texture = ExtResource( 7 )
 
-[node name="LegAnimationPlayer" type="AnimationPlayer" parent="." index="4"]
-autoplay = "default"
-anims/default = SubResource( 1 )
-
-[node name="Leg" type="Sprite" parent="." index="5"]
-position = Vector2( 60, 145 )
+[node name="Leg" type="Sprite" parent="." index="4"]
+position = Vector2( 156.524, 82.9488 )
 texture = ExtResource( 4 )
 offset = Vector2( -100, 50 )
 
-[node name="CoupleSpeech" type="AudioStreamPlayer" parent="." index="6"]
+[node name="Psych" type="Sprite" parent="." index="5"]
+position = Vector2( 247.542, 35.88 )
+texture = ExtResource( 5 )
+
+[node name="Award" type="Sprite" parent="." index="6"]
+visible = false
+position = Vector2( -174.406, -550.16 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Award" index="0"]
+anims/failure = SubResource( 2 )
+anims/success = SubResource( 3 )
+
+[node name="LegAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+
+[node name="CoupleSpeech" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource( 6 )
 volume_db = -15.0
 
-[node name="PossiblePositions" type="Node2D" parent="." index="7"]
+[node name="PossiblePositions" type="Node2D" parent="." index="9"]
 
 [node name="Position2D" type="Position2D" parent="PossiblePositions" index="0"]
 position = Vector2( -461.344, -252.621 )
@@ -80,3 +176,4 @@ position = Vector2( 56, 16 )
 
 [node name="Position2D10" type="Position2D" parent="PossiblePositions" index="9"]
 position = Vector2( -425.495, 151.054 )
+[connection signal="animation_finished" from="Award/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
