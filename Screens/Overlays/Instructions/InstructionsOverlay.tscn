@@ -10,6 +10,7 @@ font_data = ExtResource( 3 )
 
 [node name="InstructionsOverlay" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+enter_type = 4
 exit_type = 4
 
 [node name="Label" type="Label" parent="." index="3"]

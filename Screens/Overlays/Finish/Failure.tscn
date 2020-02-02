@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Screens/Overlays/BaseOverlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Screens/Overlays/Finish/Failure.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 84
@@ -35,19 +36,24 @@ tracks/1/keys = {
 }
 
 [node name="Failure" instance=ExtResource( 1 )]
-enter_type = 1
-exit_animation = "out_animation"
+script = ExtResource( 3 )
+exit_type = 2
 
 [node name="Background" parent="." index="0"]
 color = Color( 0.196078, 0.0470588, 0.0470588, 1 )
 
 [node name="Label" type="Label" parent="." index="3"]
-margin_left = 386.715
-margin_top = 260.535
-margin_right = 637.715
-margin_bottom = 344.535
+anchor_left = -0.00204271
+anchor_top = -0.00232412
+anchor_right = -0.00204271
+anchor_bottom = -0.00232412
+margin_left = 386.018
+margin_top = 261.232
+margin_right = 637.018
+margin_bottom = 345.232
 custom_fonts/font = SubResource( 1 )
-text = "FAILURE"
+text = "FAIL!"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

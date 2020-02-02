@@ -66,7 +66,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 31.3818, 10 )
+extents = Vector2( 56.881, 20.2448 )
 
 [node name="Breaker" type="Control"]
 margin_left = -51.0
@@ -100,8 +100,7 @@ anims/correct = SubResource( 1 )
 anims/incorrect = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2( 36, 16 )
+position = Vector2( 52, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -1, 0 )

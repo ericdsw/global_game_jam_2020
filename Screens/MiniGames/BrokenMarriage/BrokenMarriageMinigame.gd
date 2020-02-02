@@ -32,8 +32,8 @@ func start(difficulty := 1) -> void:
 	
 	couple_speech_pattern.play()
 	match difficulty:
-		1 : _spawn_buttons(5)
-		2 : _spawn_buttons(7)
+		1 : _spawn_buttons(2)
+		2 : _spawn_buttons(5)
 		_ : _spawn_buttons(9)
 	yield(self, "all_buttons_displayed")
 	.start(difficulty)
@@ -50,7 +50,7 @@ func _spawn_buttons(_amount : int = 2) -> void:
 	randomize()
 	wrong_options.shuffle()
 	
-	_add_button("FIX MARRIAGE", true)
+	_add_button("LOVE & CUDDLE", true)
 	yield(get_tree().create_timer(0.05), "timeout")
 	
 	for i in range(0, _amount - 1):

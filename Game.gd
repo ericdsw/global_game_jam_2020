@@ -33,6 +33,9 @@ var _cur_minigame : BaseMinigame
 
 var _reserved_minigames := []
 
+# Forgive me lord
+var _enqueued_success = false
+
 func _ready() -> void:
 	life_container.hide()
 
@@ -128,11 +131,22 @@ func _show_game_over() -> void:
 	$GameOverSoundPlayer.play()
 
 func _inject_new_minigame_set() -> void:
-	var _duplicate_minigames := minigames.duplicate()
-	randomize()
-	_duplicate_minigames.shuffle()
-	for minigame in _duplicate_minigames:
-		_reserved_minigames.append(minigame)
+	if _reserved_minigames.empty():
+		_reserved_minigames = [
+			"res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn"
+		]
+		var _duplicate_minigames := minigames.duplicate()
+		randomize()
+		_duplicate_minigames.shuffle()
+		for minigame in _duplicate_minigames:
+			if minigame != "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn":
+				_reserved_minigames.append(minigame)
+	else:
+		var _duplicate_minigames := minigames.duplicate()
+		randomize()
+		_duplicate_minigames.shuffle()
+		for minigame in _duplicate_minigames:
+			_reserved_minigames.append(minigame)
 
 func _substract_life() -> void:
 	_lives -= 1
@@ -159,6 +173,7 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 	_calculate_score(_time_left)
 	
 	if !_cur_minigame.no_overlay_for_success:
+		_enqueued_success = true
 		var _success_ins = _success_res.instance()
 		overlay_node.add_child(_success_ins)
 		yield(_success_ins, "finished")
@@ -170,6 +185,7 @@ func _on_minigame_failure() -> void:
 	_substract_life()
 	
 	if !_cur_minigame.no_overlay_for_fail:
+		_enqueued_success = false
 		var _failure_ins = _failure_res.instance()
 		overlay_node.add_child(_failure_ins)
 		yield(_failure_ins, "finished")
@@ -189,7 +205,16 @@ func _on_retry_requested() -> void:
 	_enqueue_minigame(_first_minigame)
 
 func _on_minigame_request_next(_data := {}) -> void:
-	_go_to_next_minigame()
+	if _enqueued_success:
+		var _success_ins = _success_res.instance()
+		overlay_node.add_child(_success_ins)
+		yield(_success_ins, "finished")
+		_go_to_next_minigame()
+	else:
+		var _failure_ins = _failure_res.instance()
+		overlay_node.add_child(_failure_ins)
+		yield(_failure_ins, "finished")
+		_go_to_next_minigame()
 
 func _on_minigame_requested_shake(intensity: float, duration: float) -> void:
 	get_node("Camera2D").shake(intensity, duration)
