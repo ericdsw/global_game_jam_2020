@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/FixCar/FixCarMinigame.gd" type="Script" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Resources/FixCar/LegT.png" type="Texture" id=6]
 [ext_resource path="res://Resources/FixCar/BlueLightT.png" type="Texture" id=7]
 [ext_resource path="res://Resources/FixCar/RedLightT.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Sounds/FixCar/EngineStart.wav" type="AudioStream" id=9]
+[ext_resource path="res://Resources/Sounds/FixCar/KickCar.wav" type="AudioStream" id=10]
+[ext_resource path="res://Resources/Sounds/FixCar/PoliceSiren.wav" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -103,4 +106,16 @@ texture = ExtResource( 5 )
 [node name="EndTimer" type="Timer" parent="." index="7"]
 wait_time = 2.0
 one_shot = true
+
+[node name="KickCar" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
+[node name="CarEngine" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource( 9 )
+volume_db = 4.0
+
+[node name="PoliceSirens" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource( 11 )
+volume_db = -8.0
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]

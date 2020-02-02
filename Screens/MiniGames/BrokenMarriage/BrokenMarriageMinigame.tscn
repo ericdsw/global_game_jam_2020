@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.gd" type="Script" id=1]
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Resources/FixMarriage/BGT.png" type="Texture" id=3]
 [ext_resource path="res://Resources/FixMarriage/LegT.png" type="Texture" id=4]
 [ext_resource path="res://Resources/FixMarriage/PsychT.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Sounds/FixingMarriage/TheyTalk.wav" type="AudioStream" id=6]
 
 [node name="BrokenMarriageMinigame" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -20,3 +21,7 @@ texture = ExtResource( 5 )
 [node name="Leg" type="Sprite" parent="." index="4"]
 position = Vector2( -56.5356, 197.185 )
 texture = ExtResource( 4 )
+
+[node name="CoupleSpeech" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource( 6 )
+volume_db = -15.0

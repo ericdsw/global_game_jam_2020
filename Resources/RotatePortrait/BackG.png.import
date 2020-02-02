@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BrightT.png-9ee5798c7762272e4e5721071135141f.stex"
+path="res://.import/BackG.png-e84b8c0f48adc03610a0433f8c81af49.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/RotatePortrait/BrightT.png"
-dest_files=[ "res://.import/BrightT.png-9ee5798c7762272e4e5721071135141f.stex" ]
+source_file="res://Resources/RotatePortrait/BackG.png"
+dest_files=[ "res://.import/BackG.png-e84b8c0f48adc03610a0433f8c81af49.stex" ]
 
 [params]
 

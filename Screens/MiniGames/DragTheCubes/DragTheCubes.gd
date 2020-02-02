@@ -1,5 +1,7 @@
 extends BaseMinigame
 
+onready var blook_change_sound := get_node("BlookChange") as AudioStreamPlayer
+onready var grab_blook_sound := get_node("WoodBlook") as AudioStreamPlayer
 const CUBE_PATH := "res://Screens/Minigames/DragTheCubes/Elements/LetterCube.tscn"
 const POSSIBLE_LETTERS := ["A", "B", "C", "D"]
 
@@ -46,6 +48,7 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
+			grab_blook_sound.play()
 			var _cube = _find_cube_under_mouse()
 			if _cube != null:
 				_current_cube = _cube
@@ -102,6 +105,7 @@ func _check_change() -> void:
 		_performing_swap = true
 		
 		yield(_current_cube, "finished_movement")
+		blook_change_sound.play()
 		_swap_cubes(
 			_selected_letters.find(_current_cube.assigned_letter),
 			_selected_letters.find(_hovering_cube.assigned_letter)

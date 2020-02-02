@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ShadowT.png-82f286bb962886a2bb05a8f72032db8d.stex"
+path="res://.import/Artwork2.png-d6fe5fee56e7285efc0580ea098b58b0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/RotatePortrait/ShadowT.png"
-dest_files=[ "res://.import/ShadowT.png-82f286bb962886a2bb05a8f72032db8d.stex" ]
+source_file="res://Resources/CleanPainting/Artwork2.png"
+dest_files=[ "res://.import/Artwork2.png-d6fe5fee56e7285efc0580ea098b58b0.stex" ]
 
 [params]
 

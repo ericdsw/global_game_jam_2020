@@ -20,22 +20,26 @@ const HARD_AMOUNT := {
 
 onready var left_container := get_node("LeftBreakerContainer") as VBoxContainer
 onready var right_container := get_node("RightBreakerContainer") as VBoxContainer
+onready var breaker_click := get_node("BreakerClick") as AudioStreamPlayer
+onready var electricity_grid := get_node("ElectricityGrid") as AudioStreamPlayer
 
 var _cur_amount := 0
 var _cur_damaged := 0
 
 var _breakers := []
 
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		var _area = load(C_AREA).instance()
 		add_child(_area)
 		_area.global_position = get_global_mouse_position()
+		breaker_click.play()
 
 # @Overwrite
 func start(difficulty := 1) -> void:
 	.start(difficulty)
-	
+	electricity_grid.play()
 	match difficulty:
 		1:
 			_cur_amount = EASY_PARAMS["amount"]
@@ -75,6 +79,7 @@ func _on_breaker_changed(_is_correct: bool) -> void:
 	for breaker in _breakers:
 		if !breaker._correct:
 			_damaged_breakers += 1
-	
+
 	if _damaged_breakers <= 0:
+		electricity_grid.stop()
 		on_success()

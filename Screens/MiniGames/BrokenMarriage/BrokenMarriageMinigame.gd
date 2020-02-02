@@ -1,6 +1,8 @@
 extends BaseMinigame
 
+onready var couple_speech_pattern := get_node("CoupleSpeech") as AudioStreamPlayer 
 onready var marriage_button_scene : PackedScene = load("res://Screens/Minigames/BrokenMarriage/Buttons/MarriageButton.tscn")
+var speech_timer : bool = true
 var wrong_options : Array = [
 	"FIGHT EACH OTHER", 
 	"DIVORCE", 
@@ -8,11 +10,13 @@ var wrong_options : Array = [
 	"DON'T LISTEN", 
 	"IGNORE", 
 	"RUN AWAY",
-	"ABSCOND"
+	"ABSCOND",
+	"KAREN TAKE THE KIDS"
 ]
 
 func start(difficulty := 1) -> void:
 	.start(difficulty)
+	couple_speech_pattern.play()
 	_spawn_buttons(5)
 
 func _choose_random_button_position(_button : Button) -> void:
@@ -42,7 +46,9 @@ func _spawn_buttons(_amount : int = 2) -> void:
 				_button.text = wrong_options[i - 1]
 
 func _pressed_correct_button() -> void:
+	couple_speech_pattern.stop()
 	on_success()
 
 func _pressed_wrong_button() -> void:
+	couple_speech_pattern.stop()
 	on_failure()
