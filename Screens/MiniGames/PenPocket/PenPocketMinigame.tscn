@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/PenPocket/PenPocketMinigame.gd" type="Script" id=2]
@@ -6,10 +6,14 @@
 [ext_resource path="res://Resources/PenPocket/PocketT.png" type="Texture" id=4]
 [ext_resource path="res://Resources/PenPocket/BGT.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Sounds/FixPens/Oof Normal Sound.wav" type="AudioStream" id=6]
+[ext_resource path="res://Resources/PenPocket/SuccessT.png" type="Texture" id=7]
+[ext_resource path="res://Resources/PenPocket/InkT.png" type="Texture" id=8]
 
 [node name="PenPocketMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 2.0
+no_overlay_for_success = true
+no_overlay_for_fail = true
 
 [node name="Background" type="Sprite" parent="." index="2"]
 texture = ExtResource( 5 )
@@ -55,4 +59,21 @@ texture = ExtResource( 3 )
 
 [node name="OofPlayer" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource( 6 )
+
+[node name="ThumbsUpPosition" type="Position2D" parent="." index="12"]
+position = Vector2( -515.079, 1.91278 )
+
+[node name="ThumbsUp" type="Sprite" parent="." index="13"]
+position = Vector2( -467.985, 480.549 )
+texture = ExtResource( 7 )
+
+[node name="ThumbsUpTween" type="Tween" parent="." index="14"]
+
+[node name="InkY" type="Position2D" parent="." index="15"]
+position = Vector2( 86.2283, 258.685 )
+
+[node name="Ink" type="Sprite" parent="." index="16"]
+position = Vector2( 135.975, 414.559 )
+texture = ExtResource( 8 )
 [connection signal="tween_completed" from="FingerTween" to="." method="_on_FingerTween_tween_completed"]
+[connection signal="tween_completed" from="ThumbsUpTween" to="." method="_on_ThumbsUpTween_tween_completed"]

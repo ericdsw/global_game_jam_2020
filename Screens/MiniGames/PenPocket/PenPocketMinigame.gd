@@ -7,6 +7,8 @@ onready var pen_pos_2 : Vector2 = get_node("Pocket/PenPos2").global_position
 onready var pen_pos_3 : Vector2 = get_node("Pocket/PenPos3").global_position
 onready var pen_pos_4 : Vector2 = get_node("Pocket/PenPos4").global_position
 
+onready var ink : Sprite = get_node("Ink")
+
 onready var pen_undone_y : float = get_node("PenUndoneY").global_position.y
 onready var pen_done_y : float = get_node("PenDoneY").global_position.y
 
@@ -15,6 +17,9 @@ onready var finger_done_y : float = get_node("FingerDoneY").global_position.y
 
 onready var finger : Position2D = get_node("Finger")
 onready var finger_tween : Tween = get_node("FingerTween")
+onready var thumbs_up : Sprite = get_node("ThumbsUp")
+onready var thumbs_up_pos : Vector2 = get_node("ThumbsUpPosition").global_position
+onready var thumbs_up_tween : Tween = get_node("ThumbsUpTween")
 
 onready var pen_tex_1 : Texture = preload("res://Resources/PenPocket/PenT1.png")
 onready var pen_tex_2 : Texture = preload("res://Resources/PenPocket/PenT2.png")
@@ -60,6 +65,20 @@ func start(difficulty := 1) -> void:
 func on_failure() -> void:
 	.on_failure()
 	$OofPlayer.play()
+	
+	get_tree().create_timer(0.7).connect("timeout", self, "_oof_done")
+
+func _spawn_ink() -> void:
+	ink.global_position = Vector2(pen_array[current_pen].global_position.x, $InkY.global_position.y)
+
+func _oof_done():
+	request_next()
+
+func on_success() -> void:
+	.on_success()
+	
+	thumbs_up_tween.interpolate_property(thumbs_up, "global_position", thumbs_up.global_position, thumbs_up_pos, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	thumbs_up_tween.start()
 
 func _process(delta : float) -> void:
 	if state == State.PRESSING:
@@ -67,13 +86,14 @@ func _process(delta : float) -> void:
 			pen_array[current_pen].global_position.y += units_per_second * delta
 			finger.global_position.y += units_per_second * delta
 		if Input.is_action_just_released("click"):
-			if abs(pen_array[current_pen].global_position.y - pen_done_y) <= 5:
+			if abs(pen_array[current_pen].global_position.y - pen_done_y) <= leeway:
 				pen_array[current_pen].global_position = aligned_pen_array[current_pen]
 				finger.global_position = aligned_finger_array[current_pen]
 				_put_finger_in_next_pen()
 		
-		if pen_array[current_pen].global_position.y > pen_done_y + 5:
+		if pen_array[current_pen].global_position.y > pen_done_y + leeway:
 			state = State.FAILED
+			_spawn_ink()
 			on_failure()
 
 func _spawn_pens(_undone_amount : int = 1) -> void:
@@ -158,3 +178,9 @@ func _configure_arrays() -> void:
 # connected via UI.
 func _on_FingerTween_tween_completed(object : Object, key : String) -> void:
 	state = State.PRESSING
+
+func _on_ThumbsUpTween_tween_completed(object, key):
+	get_tree().create_timer(0.5).connect("timeout", self, "_thumbs_up_timeout")
+
+func _thumbs_up_timeout() -> void:
+	request_next()
