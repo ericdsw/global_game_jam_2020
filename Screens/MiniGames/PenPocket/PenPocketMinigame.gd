@@ -38,7 +38,7 @@ var current_pen : int = -1
 var units_per_second : int = 100
 export var leeway : int = 5
 
-enum State {PRESSING, MOVING, FAILED}
+enum State {PRESSING, MOVING, FAILED, WON}
 var state : int = State.MOVING
 
 func _ready():
@@ -122,6 +122,7 @@ func _put_finger_in_next_pen() -> void:
 	if current_pen < counter_array.size() - 1:
 		current_pen += 1
 	else:
+		state = State.WON
 		on_success()
 		return
 	
