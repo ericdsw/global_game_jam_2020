@@ -77,7 +77,7 @@ tracks/4/keys = {
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn" ]
+minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn" ]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
