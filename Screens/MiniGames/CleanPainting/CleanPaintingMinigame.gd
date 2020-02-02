@@ -46,7 +46,7 @@ func _spawn_dirt(_amount : int = 1) -> void:
 		_calculate_game_duration(_amount)
 
 func _calculate_game_duration(_amount : int = 1):
-	_lifetime = _amount * 1.3
+	_lifetime = _amount * 2.5
 
 func _clean_dirt() -> void:
 	print("clean")

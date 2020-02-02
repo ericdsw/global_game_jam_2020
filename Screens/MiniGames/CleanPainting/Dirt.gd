@@ -15,11 +15,11 @@ signal cleaned()
 
 func _process(delta) -> void:
 	if area_check == true:
-		dirt_hp =  dirt_hp - (delta * 2)
+		dirt_hp =  dirt_hp - (delta * 1.2)
 		
 		sprite_dirt.modulate = Color(1,1,1,opacity)
 		if dirt_hp >= 0 and !cleaned:
-			opacity = opacity - (delta * 2)
+			opacity = opacity - (delta * 1.2)
 		elif dirt_hp <= 0 and !cleaned:
 			cleaned = true
 			opacity = 1
