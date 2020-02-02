@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/RotatePortrait/FrameT2.png" type="Texture" id=2]
@@ -6,10 +6,208 @@
 [ext_resource path="res://Resources/RotatePortrait/BrithT2.png" type="Texture" id=4]
 [ext_resource path="res://Resources/RotatePortrait/BackG.png" type="Texture" id=5]
 [ext_resource path="res://Resources/RotatePortrait/ShadowT2.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Sounds/FixFrame/Squeaktoy.wav" type="AudioStream" id=7]
+[ext_resource path="res://Resources/Sounds/FixFrame/portrait_falling.wav" type="AudioStream" id=8]
+[ext_resource path="res://Resources/Sounds/FixFrame/WinDog.wav" type="AudioStream" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Portrait:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -118 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -94 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Portrait:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "falling"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Portrait:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -118 ), Vector2( 0, 470 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -94 ), Vector2( 0, 494 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FallStream:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CrashStream:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Shadow:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Portrait:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "win"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Portrait:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -118 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shadow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -94 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Portrait:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shadow:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WinStream:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="RotatePortraitMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-duration = 100.0
+duration = 1.5
+instructions = "ALIGN THE PORTRAIT!"
+no_overlay_for_success = true
+no_overlay_for_fail = true
 
 [node name="Background" type="Sprite" parent="." index="1"]
 texture = ExtResource( 5 )
@@ -26,9 +224,6 @@ position = Vector2( 0, -118 )
 rotation = -0.375246
 texture = ExtResource( 2 )
 offset = Vector2( 5, 135 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Reflection" type="Sprite" parent="Portrait" index="0"]
 position = Vector2( 6.24833, 133.105 )
@@ -37,3 +232,19 @@ texture = ExtResource( 4 )
 
 [node name="Nail" type="Position2D" parent="." index="4"]
 position = Vector2( 0.285278, -140.467 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+autoplay = "default"
+anims/default = SubResource( 1 )
+anims/falling = SubResource( 2 )
+anims/win = SubResource( 3 )
+
+[node name="FallStream" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource( 8 )
+
+[node name="CrashStream" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 7 )
+
+[node name="WinStream" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource( 9 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

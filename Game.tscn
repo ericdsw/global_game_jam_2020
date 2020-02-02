@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=3]
 [ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/LifeContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -81,8 +82,7 @@ tracks/4/keys = {
 script = ExtResource( 1 )
 minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn" ]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
 
 [node name="MainMenuWrapper" type="Control" parent="."]
 margin_top = -24.0

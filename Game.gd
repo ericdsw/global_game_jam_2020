@@ -15,6 +15,7 @@ export (Array, String, FILE) var minigames := []
 onready var overlay_node := get_node("OverlayNode") as Node2D
 onready var main_menu_wrapper := get_node("MainMenuWrapper") as Control
 onready var life_container := get_node("ContainerZFixer/LifeContainer") as LifeContainer
+onready var camera := get_node("Camera2D") as Camera2D
 
 # The current active minigame offset. This offset will be used to decide which
 # scene path inside the `minigames` array should be used to instance the next 
@@ -81,6 +82,7 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	_minigame.connect("success", self, "_on_miningame_succeeded")
 	_minigame.connect("failure", self, "_on_minigame_failure")
 	_minigame.connect("request_next", self, "_on_minigame_request_next")
+	_minigame.connect("request_shake", self, "_on_minigame_requested_shake")
 	
 	# Show the minigame's required instruction screen
 	var _instructions = _instruction_res.instance()
@@ -184,10 +186,7 @@ func _on_retry_requested() -> void:
 	_enqueue_minigame(_first_minigame)
 
 func _on_minigame_request_next(_data := {}) -> void:
-#	if _data.has("type"):
-#		var _type = _data["type"]
-#		if _type == "success":
-#			_calculate_score(_data["time_left"])
-#		else:
-#			_substract_life()
 	_go_to_next_minigame()
+
+func _on_minigame_requested_shake(intensity: float, duration: float) -> void:
+	get_node("Camera2D").shake(intensity, duration)
