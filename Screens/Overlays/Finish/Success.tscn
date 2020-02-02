@@ -1,6 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Screens/Overlays/BaseOverlay.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "out_animation"
@@ -38,11 +43,12 @@ exit_animation = "out_animation"
 color = Color( 0.164706, 0.243137, 0.141176, 1 )
 
 [node name="Label" type="Label" parent="." index="3"]
-margin_left = 486.061
-margin_top = 292.109
-margin_right = 540.061
-margin_bottom = 306.109
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 2 )
 text = "SUCCESS"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

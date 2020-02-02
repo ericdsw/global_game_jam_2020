@@ -1,7 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Screens/Overlays/BaseOverlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/Overlays/Finish/GameOverOverlay.gd" type="Script" id=2]
+[ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 24
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 4 )
 
 [node name="GameOverOverlay" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -12,23 +25,41 @@ keep_alive = true
 color = Color( 0.239216, 0.227451, 0.54902, 1 )
 
 [node name="Label" type="Label" parent="." index="4"]
-margin_left = 492.019
-margin_top = 215.258
-margin_right = 532.019
-margin_bottom = 229.258
-text = "Score"
+margin_left = 412.939
+margin_top = 263.751
+margin_right = 611.939
+margin_bottom = 292.751
+custom_fonts/font = SubResource( 1 )
+text = "Your Score"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScoreLabel" type="Label" parent="." index="5"]
-margin_left = 398.0
-margin_top = 352.0
-margin_right = 627.0
-margin_bottom = 366.0
-text = "Score"
+margin_left = 397.358
+margin_top = 306.63
+margin_right = 626.358
+margin_bottom = 326.63
+custom_fonts/font = SubResource( 2 )
+text = "150"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label2" type="Label" parent="." index="6"]
+margin_left = 327.359
+margin_top = 127.734
+margin_right = 694.359
+margin_bottom = 185.734
+custom_fonts/font = SubResource( 3 )
+text = "Game Over"
+
+[node name="StartButton" parent="." index="7" instance=ExtResource( 3 )]
+margin_left = 391.579
+margin_top = 396.616
+margin_right = 631.579
+margin_bottom = 466.616
+text = "Retry"
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

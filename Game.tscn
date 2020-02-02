@@ -1,46 +1,123 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
+[ext_resource path="res://Resources/good times rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/General/DefaultButtonStyle.tres" type="StyleBox" id=3]
+[ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainMenuWrapper/GameName:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MainMenuWrapper/StartButton:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MainMenuWrapper/Credits:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MainMenuWrapper/StartButton:rect_position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 0.267943 ),
+"update": 0,
+"values": [ Vector2( -120, 100 ), Vector2( -120, 100 ), Vector2( -120, 50 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MainMenuWrapper/Credits:rect_position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.8, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 0.267943 ),
+"update": 0,
+"values": [ Vector2( -120, 210 ), Vector2( -120, 210 ), Vector2( -120, 160 ) ]
+}
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
-minigames = [ "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn" ]
+minigames = [ "res://Screens/MiniGames/CleanPainting/CleanPaintingMinigame.tscn", "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn", "res://Screens/MiniGames/DragTheCubes/DragTheCubes.tscn", "res://Screens/MiniGames/FixCar/FixCarMinigame.tscn", "res://Screens/MiniGames/FixTV/FixTVMinigame.tscn", "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn", "res://Screens/MiniGames/BreakerFix/BreakerFixMinigame.tscn" ]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
 [node name="MainMenuWrapper" type="Control" parent="."]
+margin_top = -24.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GameName" type="Label" parent="MainMenuWrapper"]
-margin_left = -39.6007
-margin_top = -123.531
-margin_right = 40.3993
-margin_bottom = -109.531
-text = "GAME NAME"
+anchor_left = -0.0147766
+anchor_right = -0.0147766
+margin_left = -277.409
+margin_top = -159.463
+margin_right = 280.591
+margin_bottom = -101.463
+custom_fonts/font = SubResource( 1 )
+text = "Quick Fix"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="Button" parent="MainMenuWrapper"]
-margin_left = -43.7381
-margin_top = 24.361
-margin_right = 39.2619
-margin_bottom = 44.361
-text = "Start Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="StartButton" parent="MainMenuWrapper" instance=ExtResource( 4 )]
 
 [node name="Credits" type="Button" parent="MainMenuWrapper"]
-margin_left = -43.7381
-margin_top = 69.361
-margin_right = 39.2619
-margin_bottom = 89.361
+margin_left = -120.0
+margin_top = 160.0
+margin_right = 120.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 240, 70 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 3 )
+custom_styles/normal = ExtResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Credits"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -48,5 +125,9 @@ __meta__ = {
 
 [node name="OverlayNode" type="Node2D" parent="."]
 z_index = 100
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro_anim"
+anims/intro_anim = SubResource( 3 )
 [connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]

@@ -7,14 +7,14 @@
 
 [node name="RotatePortraitMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-duration = 2.0
+duration = 1.5
 
 [node name="Background" type="Sprite" parent="." index="1"]
 texture = ExtResource( 4 )
 
 [node name="Portrait" type="Sprite" parent="." index="2"]
 position = Vector2( 0, -118 )
-rotation = -0.541052
+rotation = -0.375246
 texture = ExtResource( 2 )
 offset = Vector2( 5, 135 )
 

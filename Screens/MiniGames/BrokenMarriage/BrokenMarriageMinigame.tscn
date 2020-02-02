@@ -1,8 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.gd" type="Script" id=1]
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/FixMarriage/BGT.png" type="Texture" id=3]
+[ext_resource path="res://Resources/FixMarriage/LegT.png" type="Texture" id=4]
+[ext_resource path="res://Resources/FixMarriage/PsychT.png" type="Texture" id=5]
 
 [node name="BrokenMarriageMinigame" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 duration = 3.0
+
+[node name="Background" type="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )
+
+[node name="Psych" type="Sprite" parent="." index="3"]
+position = Vector2( 253.542, 20.88 )
+texture = ExtResource( 5 )
+
+[node name="Leg" type="Sprite" parent="." index="4"]
+position = Vector2( -56.5356, 197.185 )
+texture = ExtResource( 4 )

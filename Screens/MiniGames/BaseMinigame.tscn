@@ -11,4 +11,5 @@ one_shot = true
 
 [node name="TimerClock" parent="." instance=ExtResource( 2 )]
 position = Vector2( 437.111, 225.798 )
+z_index = 5
 [connection signal="timeout" from="DeadlineTimer" to="." method="_on_DeadlineTimer_timeout"]

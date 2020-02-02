@@ -43,12 +43,9 @@ func start(difficulty := 1) -> void:
 		2:
 			_cur_amount = MEDIUM_AMOUNT["amount"]
 			_cur_damaged = MEDIUM_AMOUNT["damaged"]
-		3:
+		_:
 			_cur_amount = HARD_AMOUNT["amount"]
 			_cur_damaged = HARD_AMOUNT["damaged"]
-		_:
-			_cur_amount = EASY_PARAMS["amount"]
-			_cur_damaged = EASY_PARAMS["damaged"]
 	
 	var _y_pos = (_cur_amount / 4.0) * 35
 	
