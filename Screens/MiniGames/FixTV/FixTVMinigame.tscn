@@ -180,6 +180,7 @@ tracks/1/keys = {
 [node name="FixTVMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 3.0
+instructions = "FIX THE TV"
 no_overlay_for_success = true
 
 [node name="Background" type="Sprite" parent="." index="1"]

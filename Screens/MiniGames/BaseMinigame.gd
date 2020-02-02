@@ -49,6 +49,9 @@ func start(difficulty := 1) -> void:
 	_is_active = true
 	timer_clock.set_max_time(_lifetime)
 	timer_clock.play_time_sound()
+	
+	if difficulty == 1:
+		_lifetime += 2.0
 
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer

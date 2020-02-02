@@ -11,6 +11,7 @@
 
 [node name="CleanPaintingMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+instructions = "CLEAN THE PAINTING"
 
 [node name="Background" type="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )

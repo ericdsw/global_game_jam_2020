@@ -86,10 +86,11 @@ func _enqueue_minigame(_minigame: BaseMinigame) -> void:
 	# Show the minigame's required instruction screen
 	var _instructions = _instruction_res.instance()
 	overlay_node.add_child(_instructions)
-	if _minigame.instructions == "":
-		_instructions.show_instruction("Fix it!")
-	else:
-		_instructions.show_instruction(_minigame.instructions)
+#	if _minigame.instructions == "":
+#		_instructions.show_instruction("Fix it!")
+#	else:
+#		_instructions.show_instruction(_minigame.instructions)
+	_instructions.show_instruction("Quick Fix!")
 	_instructions.connect("finished", self, "_on_instructions_finished")
 
 	# Wait for the instruction screen's "peaked" signal before adding the minigame to
@@ -132,7 +133,6 @@ func _inject_new_minigame_set() -> void:
 	_duplicate_minigames.shuffle()
 	for minigame in _duplicate_minigames:
 		_reserved_minigames.append(minigame)
-	print("foo")
 
 func _substract_life() -> void:
 	_lives -= 1
@@ -149,7 +149,7 @@ func _on_Credits_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_instructions_finished() -> void:
-	var _difficulty := int(floor(_current_minigame_offset / 5)) + 1
+	var _difficulty := int(floor(_current_minigame_offset / 8)) + 1
 	_cur_minigame.start(_difficulty)
 
 # Show the success screen
