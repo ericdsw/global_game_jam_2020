@@ -9,7 +9,7 @@
 
 [node name="PenPocketMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-duration = 60.0
+duration = 2.0
 
 [node name="Background" type="Sprite" parent="." index="2"]
 texture = ExtResource( 5 )
