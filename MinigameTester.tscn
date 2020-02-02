@@ -4,7 +4,7 @@
 
 [node name="MinigameTester" type="Node2D"]
 script = ExtResource( 1 )
-minigame_to_test = "res://Screens/MiniGames/BrokenMarriage/BrokenMarriageMinigame.tscn"
+minigame_to_test = "res://Screens/MiniGames/RotatePortrait/RotatePortraitMinigame.tscn"
 target_difficulty = 3
 
 [node name="Timer" type="Timer" parent="."]

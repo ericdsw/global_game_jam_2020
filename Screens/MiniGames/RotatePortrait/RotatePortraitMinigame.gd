@@ -1,6 +1,8 @@
 extends BaseMinigame
 
 onready var portrait : Sprite = get_node("Portrait")
+onready var reflection : Sprite = get_node("Portrait/Reflection")
+onready var shadow : Sprite = get_node("Shadow")
 onready var nail : Vector2 = get_node("Nail").global_position
 
 var anchor : int
@@ -12,18 +14,6 @@ var leeway : float = 0.5
 func _ready() -> void:
 	_set_leeway(5)
 
-#func _input(event: InputEvent) -> void:
-#
-#	if event.is_action_pressed("click"):
-#		anchor = get_global_mouse_position().x
-#
-#	if anchor != null:
-#		if event is InputEventMouseMotion:
-#			if Input.is_action_pressed("click"):
-#				difference += (anchor - get_global_mouse_position().x) * get_process_delta_time()
-#				print(difference)
-#				portrait.rotation_degrees = difference
-
 func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion and clicking:
 		if event.relative.x < 0:
@@ -32,6 +22,10 @@ func _input(event : InputEvent) -> void:
 			portrait.rotation_degrees -= 1
 
 func _process(delta : float) -> void:
+	
+	reflection.modulate.a = clamp(abs(portrait.rotation_degrees), 0.0, 45.0) / 45.0 + 0.2
+	shadow.rotation_degrees = portrait.rotation_degrees
+	
 	if Input.is_action_pressed("click"):
 		clicking = true
 	else:
@@ -41,6 +35,7 @@ func _process(delta : float) -> void:
 		if portrait.rotation_degrees > -leeway and portrait.rotation_degrees < leeway:
 			print("NAISUUU")
 			portrait.rotation_degrees = 0
+			shadow.rotation_degrees = 0
 			on_success()
 			set_process(false)
 
