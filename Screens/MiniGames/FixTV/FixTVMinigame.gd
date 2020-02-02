@@ -14,14 +14,9 @@ onready var arm_sound_play : AudioStreamPlayer = get_node("ArmSound")
 onready var foot_sound_play : AudioStreamPlayer = get_node("FootSound")
 onready var win_sound_play : AudioStreamPlayer = get_node("WinSound")
 
-
 var amount_of_clicks : int = 5
 var click_counter : int = 0
 var done : bool = false
-
-func _ready():
-	_set_amount_of_clicks(1, 5)
-	_set_rest_timeout(0.5)
 
 func _input(event : InputEvent) -> void:
 	if done: return
@@ -42,6 +37,24 @@ func _input(event : InputEvent) -> void:
 		elif click_counter > amount_of_clicks and !rest_timer.is_stopped():
 			on_failure()
 
+func start(difficulty := 1) -> void:
+	.start(difficulty)
+	
+	match difficulty:
+		1:
+			_set_amount_of_clicks(1, 5)
+			_set_rest_timeout(0.5)
+		2:
+			_set_amount_of_clicks(3, 8)
+			_set_rest_timeout(1.0)
+			_lifetime += 1.0
+		_:
+			_set_amount_of_clicks(5, 10)
+			_set_rest_timeout(1.2)
+			_lifetime += 2.0
+	
+	timer_clock.set_max_time(_lifetime)
+
 # Sets the minimum and maximum amount of clicks possible needed to get clean image.
 func _set_amount_of_clicks(_min : int = 1, _max : int = 5) -> void:
 	randomize()
@@ -49,7 +62,8 @@ func _set_amount_of_clicks(_min : int = 1, _max : int = 5) -> void:
 
 func _animate_arm_or_foot() -> void:
 	randomize()
-	if randi() % 10 + 1 < 5:
+	
+	if _assigned_difficulty == 1:
 		a_tween.stop_all()
 		arm_sound_play.stop()
 		arm.global_position = a_i_pos
@@ -58,7 +72,7 @@ func _animate_arm_or_foot() -> void:
 		)
 		a_tween.start()
 		arm_sound_play.play()
-	else:
+	elif _assigned_difficulty == 2:
 		f_tween.stop_all()
 		foot_sound_play.stop()
 		foot.global_position = f_i_pos
@@ -67,6 +81,25 @@ func _animate_arm_or_foot() -> void:
 		)
 		f_tween.start()
 		foot_sound_play.play()
+	else:
+		if randi() % 10 + 1 < 5:
+			a_tween.stop_all()
+			arm_sound_play.stop()
+			arm.global_position = a_i_pos
+			a_tween.interpolate_property(
+				arm, "global_position", a_i_pos, a_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN
+			)
+			a_tween.start()
+			arm_sound_play.play()
+		else:
+			f_tween.stop_all()
+			foot_sound_play.stop()
+			foot.global_position = f_i_pos
+			f_tween.interpolate_property(
+				foot, "global_position", f_i_pos, f_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN
+			)
+			f_tween.start()
+			foot_sound_play.play()
 
 # Sets the time the player has to NOT click in order to succeed.
 # Probably a smaller time is easier.

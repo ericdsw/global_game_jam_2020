@@ -26,7 +26,7 @@ var _current_minigame_offset := 0
 var _score := 0
 
 # How many lives the player has
-var _lives := 4
+var _lives := 3
 
 # The current active minigame instance
 var _cur_minigame : BaseMinigame
@@ -125,6 +125,7 @@ func _show_game_over() -> void:
 	overlay_node.add_child(_game_over_inst)
 	_game_over_inst.show_score(_score)
 	_game_over_inst.connect("retry_requested", self, "_on_retry_requested")
+	$GameOverSoundPlayer.play()
 
 func _inject_new_minigame_set() -> void:
 	var _duplicate_minigames := minigames.duplicate()
@@ -175,7 +176,7 @@ func _on_minigame_failure() -> void:
 
 func _on_retry_requested() -> void:
 	
-	_lives = 4
+	_lives = 3
 	_score = 0
 	
 	_reserved_minigames.clear()
@@ -190,7 +191,6 @@ func _on_minigame_request_next(_data := {}) -> void:
 
 func _on_minigame_requested_shake(intensity: float, duration: float) -> void:
 	get_node("Camera2D").shake(intensity, duration)
-
 
 func _on_AudioStreamPlayer_finished() -> void:
 	$AudioStreamPlayer.play()

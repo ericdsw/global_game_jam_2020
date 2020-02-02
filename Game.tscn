@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Elements/BaseButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Elements/LifeContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Sounds/DeathSoundShorther.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -131,9 +132,13 @@ margin_top = -271.923
 margin_right = 44.0443
 margin_bottom = -221.923
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -5.0
 autoplay = true
+
+[node name="GameOverSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 [connection signal="pressed" from="MainMenuWrapper/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="MainMenuWrapper/Credits" to="." method="_on_Credits_pressed"]
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="BGMPlayer" to="." method="_on_AudioStreamPlayer_finished"]

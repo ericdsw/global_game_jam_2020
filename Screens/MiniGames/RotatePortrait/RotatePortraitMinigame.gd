@@ -13,7 +13,10 @@ var clicking : bool = false
 var leeway : float = 0.5
 
 func _ready() -> void:
-	_set_leeway(5)
+	randomize()
+	var _rand_starting_rotation = rand_range(-60, 60)
+	portrait.rotation_degrees = _rand_starting_rotation
+	shadow.rotation_degrees = _rand_starting_rotation
 
 func _input(event : InputEvent) -> void:
 	
@@ -44,6 +47,21 @@ func _process(_delta : float) -> void:
 			shadow.rotation_degrees = 0
 			on_success()
 			set_process(false)
+
+func start(difficulty := 1) -> void:
+	.start(difficulty)
+	match difficulty:
+		1: 
+			_set_leeway(5)
+		2: 
+			_set_leeway(3)
+			_lifetime += 0.5
+		_: 
+			_set_leeway(2)
+			_lifetime += 1.0
+	
+	timer_clock.set_max_time(_lifetime)
+	
 
 func _set_leeway(_leeway : float = 0.5) -> void:
 	leeway = _leeway

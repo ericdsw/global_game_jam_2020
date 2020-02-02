@@ -38,13 +38,4 @@ rect_pivot_offset = Vector2( 25, 25 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="TextureRect4" type="TextureRect" parent="."]
-margin_left = 180.0
-margin_right = 230.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 50, 50 )
-rect_pivot_offset = Vector2( 25, 25 )
-texture = ExtResource( 3 )
-expand = true
-
 [node name="Tween" type="Tween" parent="."]

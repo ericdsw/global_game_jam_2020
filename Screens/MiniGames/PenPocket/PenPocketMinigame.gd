@@ -42,8 +42,18 @@ func _ready():
 	pen_images_array.append(pen_tex_3)
 	pen_images_array.append(pen_tex_4)
 	_configure_arrays()
-	_spawn_pens(3)
+
+func start(difficulty := 1) -> void:
+	.start(difficulty)
+	match difficulty:
+		1: _spawn_pens(1)
+		2: _spawn_pens(2)
+		_: _spawn_pens(3)
 	_put_finger_in_next_pen()
+
+func on_failure() -> void:
+	.on_failure()
+	$OofPlayer.play()
 
 func _process(delta : float) -> void:
 	if state == State.PRESSING:

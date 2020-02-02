@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Screens/MiniGames/FixCar/FixCarMinigame.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Resources/Sounds/FixCar/EngineStart.wav" type="AudioStream" id=9]
 [ext_resource path="res://Resources/Sounds/FixCar/KickCar.wav" type="AudioStream" id=10]
 [ext_resource path="res://Resources/Sounds/FixCar/PoliceSiren.wav" type="AudioStream" id=11]
+[ext_resource path="res://Resources/Sounds/FixPens/Oof Normal Sound.wav" type="AudioStream" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "start"
@@ -61,7 +62,19 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1.2, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 1000.0 ]
+"values": [ 0.0, 0.0, 500.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ThiefOof:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -172,4 +185,7 @@ volume_db = 4.0
 
 [node name="PoliceSirens" type="AudioStreamPlayer" parent="." index="11"]
 stream = ExtResource( 11 )
+
+[node name="ThiefOof" type="AudioStreamPlayer" parent="." index="12"]
+stream = ExtResource( 12 )
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
