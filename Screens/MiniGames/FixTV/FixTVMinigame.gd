@@ -118,8 +118,8 @@ func on_success() -> void:
 	win_sound_play.play()
 	done = true
 	.on_success()
-
-	yield(get_tree().create_timer(1.0), "timeout")
+	
+	yield(get_tree().create_timer(2.0), "timeout")
 	request_next()
 
 # @Overwrite
