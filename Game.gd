@@ -121,6 +121,9 @@ func _inject_new_minigame_set() -> void:
 	_duplicate_minigames.shuffle()
 	_reserved_minigames += _duplicate_minigames
 
+func _substract_life() -> void:
+	pass
+
 # ================================ Callbacks ================================ #
 
 # Connected via UI
@@ -141,7 +144,7 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 	# Calculate what will be added to the score depending on the time left
 	_calculate_score(_time_left)
 	
-	if !_cur_minigame.no_overlay_for_fail:
+	if !_cur_minigame.no_overlay_for_success:
 		var _success_ins = _success_res.instance()
 		overlay_node.add_child(_success_ins)
 		yield(_success_ins, "finished")
@@ -150,6 +153,7 @@ func _on_miningame_succeeded(_time_left: float) -> void:
 # Show the failure screen
 func _on_minigame_failure() -> void:
 	if !_cur_minigame.no_overlay_for_fail:
+		_substract_life()
 		var _failure_ins = _failure_res.instance()
 		overlay_node.add_child(_failure_ins)
 		yield(_failure_ins, "finished")
@@ -164,5 +168,11 @@ func _on_retry_requested() -> void:
 	var _first_minigame := load(minigames[0]).instance() as BaseMinigame
 	_enqueue_minigame(_first_minigame)
 
-func _on_minigame_request_next() -> void:
+func _on_minigame_request_next(_data := {}) -> void:
+	if _data.has("type"):
+		var _type = _data["type"]
+		if _type == "success":
+			_calculate_score(_data["time_left"])
+		else:
+			_substract_life()
 	_go_to_next_minigame()

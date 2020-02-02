@@ -7,6 +7,7 @@ export (float) var duration := 1.0
 # The instruction text to show in the transition overlay
 export (String) var instructions := ""
 
+export (bool) var no_overlay_for_success := false
 export (bool) var no_overlay_for_fail := false
 
 # Use this variable to decide any custom logic based on difficulty
@@ -20,7 +21,7 @@ onready var timer_clock = get_node("TimerClock")
 
 signal success(time_left)
 signal failure()
-signal request_next()
+signal request_next(data)
 
 # ================================ Lifecycle ================================ #
 
@@ -61,8 +62,8 @@ func on_failure() -> void:
 		_is_active = false
 		emit_signal("failure")
 
-func request_next() -> void:
-	emit_signal("request_next")
+func request_next(extra_data := {}) -> void:
+	emit_signal("request_next", extra_data)
 
 # ================================ Callbacks ================================ #
 
