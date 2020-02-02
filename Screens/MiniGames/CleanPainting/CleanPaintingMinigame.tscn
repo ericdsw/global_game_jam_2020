@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Screens/MiniGames/BaseMinigame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Resources/CleanPainting/BGT.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Resources/Sounds/FixPainting/Scrubbing.wav" type="AudioStream" id=5]
 [ext_resource path="res://Resources/Sounds/FixPainting/CleanSpot.wav" type="AudioStream" id=6]
 [ext_resource path="res://Resources/Sounds/FixPainting/TearingSound.wav" type="AudioStream" id=7]
+[ext_resource path="res://Resources/CleanPainting/LampT.png" type="Texture" id=8]
 
 [node name="CleanPaintingMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -17,11 +18,14 @@ texture = ExtResource( 2 )
 [node name="Painting" type="Sprite" parent="." index="2"]
 texture = ExtResource( 4 )
 
-[node name="CleaningSound" type="AudioStreamPlayer" parent="." index="4"]
+[node name="Lamp" type="Sprite" parent="." index="3"]
+texture = ExtResource( 8 )
+
+[node name="CleaningSound" type="AudioStreamPlayer" parent="." index="5"]
 stream = ExtResource( 5 )
 
-[node name="SparkleSound" type="AudioStreamPlayer" parent="." index="5"]
+[node name="SparkleSound" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 6 )
 
-[node name="RipSound" type="AudioStreamPlayer" parent="." index="6"]
+[node name="RipSound" type="AudioStreamPlayer" parent="." index="7"]
 stream = ExtResource( 7 )

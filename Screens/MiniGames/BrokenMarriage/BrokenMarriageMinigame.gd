@@ -11,39 +11,63 @@ var wrong_options : Array = [
 	"IGNORE", 
 	"RUN AWAY",
 	"ABSCOND",
-	"KAREN TAKE THE KIDS"
+	"KAREN, TAKE THE KIDS",
+	"CHANGE IDENDITY",
+	"DO A BARREL ROLL",
+	"TOPPLE THE MONARCHY",
+	"ESTABLISH COMMUNISM",
+	"DO A REACTION VIDEO",
+	"ALEXA, PLAY DESPACITO"
 ]
 
-func start(difficulty := 1) -> void:
-	.start(difficulty)
-	couple_speech_pattern.play()
-	_spawn_buttons(5)
+var possible_positions := []
+signal all_buttons_displayed()
 
+func _ready() -> void:
+	for child in get_node("PossiblePositions").get_children():
+		possible_positions.append(child.position)
+
+func start(difficulty := 1) -> void:
+	
+	couple_speech_pattern.play()
+	match difficulty:
+		1 : _spawn_buttons(5)
+		2 : _spawn_buttons(7)
+		_ : _spawn_buttons(9)
+	yield(self, "all_buttons_displayed")
+	.start(difficulty)
+		
 func _choose_random_button_position(_button : Button) -> void:
 	randomize()
-	var viewport : Vector2 = get_viewport_rect().size
-	var fix_marriage_button_size = _button.rect_size 
-	_button.rect_global_position = Vector2(
-		rand_range(-viewport.x / 2.0, viewport.x / 2.0 - fix_marriage_button_size.x), 
-		rand_range(-viewport.y / 2.0, 0.0) #viewport.y / 2.0 - fix_marriage_button_size.y)
-	)
+	var _random_pos : int = randi() % possible_positions.size()
+	var _used_pos : Vector2 = possible_positions[_random_pos]
+	_button.rect_global_position = _used_pos
+	possible_positions.remove(_random_pos)
 
 func _spawn_buttons(_amount : int = 2) -> void:
-	for i in range(0, _amount):
-		var _button : Button = marriage_button_scene.instance()
-		add_child(_button)
-		_choose_random_button_position(_button)
-		
-		if i == 0:
-			_button.connect("pressed", self, "_pressed_correct_button")
-			_button.text = "FIX MARRIAGE"
-		else:
-			_button.connect("pressed", self, "_pressed_wrong_button")
-			wrong_options.shuffle()
-			if i > wrong_options.size():
-				_button.text = wrong_options.back()
-			else:
-				_button.text = wrong_options[i - 1]
+	
+	randomize()
+	wrong_options.shuffle()
+	
+	_add_button("FIX MARRIAGE", true)
+	yield(get_tree().create_timer(0.05), "timeout")
+	
+	for i in range(0, _amount - 1):
+		_add_button(wrong_options[i])
+		yield(get_tree().create_timer(0.05), "timeout")
+	
+	emit_signal("all_buttons_displayed")
+
+func _add_button(text : String, is_correct := false) -> MarriageButton:
+	var _button : MarriageButton = marriage_button_scene.instance()
+	_button.text = text
+	if is_correct:
+		_button.connect("pressed", self, "_pressed_correct_button")
+	else:
+		_button.connect("pressed", self, "_pressed_wrong_button")
+	add_child(_button)
+	_choose_random_button_position(_button)
+	return _button
 
 func _pressed_correct_button() -> void:
 	couple_speech_pattern.stop()

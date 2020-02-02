@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "LifeContainer",
 "language": "GDScript",
 "path": "res://Elements/LifeContainer.gd"
+}, {
+"base": "Button",
+"class": "MarriageButton",
+"language": "GDScript",
+"path": "res://Screens/MiniGames/BrokenMarriage/Buttons/MarriageButton.gd"
 } ]
 _global_script_class_icons={
 "BaseMinigame": "",
 "BaseOverlay": "",
 "InstructionsOverlay": "",
 "LetterCube": "",
-"LifeContainer": ""
+"LifeContainer": "",
+"MarriageButton": ""
 }
 
 [application]

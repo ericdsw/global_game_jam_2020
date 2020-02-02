@@ -6,12 +6,22 @@ onready var click_area_scene : PackedScene = load("res://Screens/MiniGames/Clean
 onready var clean_sound_play : AudioStreamPlayer = get_node("CleaningSound")
 var _click_area : Area2D
 
+onready var artwork_1 : Texture = preload("res://Resources/CleanPainting/Artwork1.png")
+onready var artwork_2 : Texture = preload("res://Resources/CleanPainting/Artwork2.png")
+onready var artwork_3 : Texture = preload("res://Resources/CleanPainting/Artwork3.png")
+
 onready var sparkle : AudioStreamPlayer = get_node("SparkleSound")
 onready var rip : AudioStreamPlayer = get_node("RipSound")
 
 export var dirt_amount : int 
 
 var cleaned_dirt : int = 0
+
+func _ready() -> void:
+	randomize()
+	var temp_array : Array = [artwork_1, artwork_2, artwork_3]
+	temp_array.shuffle()
+	$Painting.texture = temp_array[1]
 
 func start(difficulty := 1) -> void:
 	.start(difficulty)
