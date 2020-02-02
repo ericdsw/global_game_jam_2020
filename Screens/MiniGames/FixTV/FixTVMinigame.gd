@@ -51,14 +51,18 @@ func _animate_arm_or_foot() -> void:
 		a_tween.stop_all()
 		arm_sound_play.stop()
 		arm.global_position = a_i_pos
-		a_tween.interpolate_property(arm, "global_position", a_i_pos, a_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		a_tween.interpolate_property(
+			arm, "global_position", a_i_pos, a_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN
+		)
 		a_tween.start()
 		arm_sound_play.play()
 	else:
 		f_tween.stop_all()
 		foot_sound_play.stop()
 		foot.global_position = f_i_pos
-		f_tween.interpolate_property(foot, "global_position", f_i_pos, f_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN)
+		f_tween.interpolate_property(
+			foot, "global_position", f_i_pos, f_f_pos, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN
+		)
 		f_tween.start()
 		foot_sound_play.play()
 
@@ -84,7 +88,7 @@ func on_failure() -> void:
 	.on_failure()
 
 func _on_ArmTween_tween_completed(object : Object, key : String) -> void:
-	pass
+	request_shake(3.0, 0.1)
 
 func _on_FootTween_tween_completed(object : Object, key : String) -> void:
-	pass
+	request_shake(3.0 , 0.1)
