@@ -53,12 +53,15 @@ func start(difficulty := 1) -> void:
 	match difficulty:
 		1: 
 			_spawn_pens(1)
+			leeway = 5
 		2:
 			_spawn_pens(2)
 			_lifetime += 1.0
+			leeway = 3.5
 		_: 
 			_spawn_pens(3)
 			_lifetime += 2.0
+			leeway = 2
 	timer_clock.set_max_time(_lifetime)
 	_put_finger_in_next_pen()
 
