@@ -25,17 +25,41 @@ func _input(event : InputEvent) -> void:
 		_animate_arm_or_foot()
 		click_counter += 1
 		
+#		if click_counter < amount_of_clicks:
+#			anim_player.stop()
+#			var t_a : Array = ["bad_hit_1", "bad_hit_2"]
+#			t_a.shuffle()
+#			anim_player.play(t_a[0])
+#		elif click_counter == amount_of_clicks:
+#			rest_timer.start()
+#			anim_player.stop()
+#			anim_player.play("good_hit")
+#		elif !rest_timer.is_stopped() and click_counter > amount_of_clicks:
+#			rest_timer.stop()
+#			randomize()
+#			amount_of_clicks += (randi() % 3) + 1
+#			on_failure()
+		
 		if click_counter < amount_of_clicks:
-			anim_player.stop()
-			var t_a : Array = ["bad_hit_1", "bad_hit_2"]
-			t_a.shuffle()
-			anim_player.play(t_a[0])
-		elif click_counter == amount_of_clicks:
-			rest_timer.start()
-			anim_player.stop()
-			anim_player.play("good_hit")
-		elif click_counter > amount_of_clicks and !rest_timer.is_stopped():
-			on_failure()
+			_play_bad_hit()
+		elif click_counter == amount_of_clicks and rest_timer.is_stopped():
+			_play_good_hit()
+		elif !rest_timer.is_stopped():
+			_play_bad_hit()
+			rest_timer.stop()
+			randomize()
+			amount_of_clicks += (randi() % 3) + 2
+
+func _play_bad_hit() -> void:
+	anim_player.stop()
+	var t_a : Array = ["bad_hit_1", "bad_hit_2"]
+	t_a.shuffle()
+	anim_player.play(t_a[0])
+
+func _play_good_hit() -> void:
+	anim_player.stop()
+	anim_player.play("good_hit")
+	rest_timer.start()
 
 func start(difficulty := 1) -> void:
 	.start(difficulty)
