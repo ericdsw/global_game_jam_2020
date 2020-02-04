@@ -56,22 +56,21 @@ func start(difficulty := 1) -> void:
 # Call this method when a minigame is completed successfully, will emit the
 # required signal and stop the deadline timer
 func on_success() -> void:
-#	if _is_active:
-	_is_active = false
-	emit_signal("success", _lifetime)
-	timer_clock.stop_time_sound()
-	get_parent()._enqueued_success = true
+	if _is_active:
+        _is_active = false
+        emit_signal("success", _lifetime)
+        timer_clock.stop_time_sound()
+        get_parent()._enqueued_success = true
 
 # Call this methid if the minigame's fail condition is met. Note that this method
 # will be automatically called when the deadline timer runs out, so subclasses
 # are not required to call it directly
 func on_failure() -> void:
-	print("on failure of base minigame")
-#	if _is_active:
-	_is_active = false
-	emit_signal("failure")
-	timer_clock.stop_time_sound()
-	get_parent()._enqueued_success = false
+	if _is_active:
+        _is_active = false
+        emit_signal("failure")
+        timer_clock.stop_time_sound()
+        get_parent()._enqueued_success = false
 
 func request_next() -> void:
 	emit_signal("request_next")
