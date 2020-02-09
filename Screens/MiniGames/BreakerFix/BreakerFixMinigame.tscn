@@ -8,6 +8,8 @@
 [node name="BreakerFixMinigame" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 duration = 3.0
+breaker_path = "res://Screens/MiniGames/BreakerFix/Elements/Breaker.tscn"
+breaker_click_area_path = "res://Screens/MiniGames/BreakerFix/Elements/BreakerClickArea.tscn"
 
 [node name="Background" type="Sprite" parent="." index="0"]
 texture = ExtResource( 6 )

@@ -1,8 +1,9 @@
 extends BaseMinigame
 
+export (String, FILE) var draggable_cube_path := ""
+
 onready var blook_change_sound := get_node("BlookChange") as AudioStreamPlayer
 onready var grab_blook_sound := get_node("WoodBlook") as AudioStreamPlayer
-const CUBE_PATH := "res://Screens/Minigames/DragTheCubes/Elements/LetterCube.tscn"
 const POSSIBLE_LETTERS := ["A", "B", "C", "D"]
 
 var _cubes := []
@@ -73,7 +74,7 @@ func start(difficulty := 1) -> void:
 	var _flipped := 0
 	for i in range(_selected_letters.size()):
 		
-		var _cube = load(CUBE_PATH).instance()
+		var _cube = load(draggable_cube_path).instance()
 		
 		var _used_size = _cube.cube_size + 30.0
 		var _cube_origin = - (_selected_letters.size() / 2.0 * _used_size / 2.0) + (_used_size / 4.0)

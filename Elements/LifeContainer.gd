@@ -10,7 +10,7 @@ func display_available_lives(amount: int) -> void:
 			lives[i].rect_scale = Vector2(1,1)
 		else:
 			tween.interpolate_property(
-				lives[i], "rect_scale", lives[i].rect_scale, Vector2(), 0.3,
+				lives[i], "rect_scale", Vector2(1,1), Vector2(), 0.3,
 				Tween.TRANS_BOUNCE, Tween.EASE_IN_OUT
 			)
 			tween.start()

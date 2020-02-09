@@ -1,5 +1,8 @@
 extends BaseMinigame
 
+export (String, FILE) var breaker_path := ""
+export (String, FILE) var breaker_click_area_path := ""
+
 const BREAKER_P := "res://Screens/Minigames/BreakerFix/Elements/Breaker.tscn"
 const C_AREA := "res://Screens/Minigames/BreakerFix/Elements/BreakerClickArea.tscn"
 
@@ -20,7 +23,6 @@ const HARD_AMOUNT := {
 
 onready var left_container := get_node("LeftBreakerContainer") as VBoxContainer
 onready var right_container := get_node("RightBreakerContainer") as VBoxContainer
-#onready var breaker_click := get_node("BreakerClick") as AudioStreamPlayer
 onready var electricity_grid := get_node("ElectricityGrid") as AudioStreamPlayer
 
 var _cur_amount := 0
@@ -31,10 +33,9 @@ var _breakers := []
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		var _area = load(C_AREA).instance()
+		var _area = load(breaker_click_area_path).instance()
 		add_child(_area)
 		_area.global_position = get_global_mouse_position()
-#		breaker_click.play()
 
 # @Overwrite
 func start(difficulty := 1) -> void:
@@ -55,7 +56,7 @@ func start(difficulty := 1) -> void:
 	
 	for i in range(_cur_amount):
 		
-		var _breaker = load(BREAKER_P).instance()
+		var _breaker = load(breaker_path).instance()
 		
 		# Calculate X position and orientation
 		if i <= _cur_amount / 2.0 - 1:

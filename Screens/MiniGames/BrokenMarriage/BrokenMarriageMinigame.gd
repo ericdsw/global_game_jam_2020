@@ -1,7 +1,10 @@
 extends BaseMinigame
 
+export (String, FILE) var marriage_button_path := ""
+
 onready var couple_speech_pattern := get_node("CoupleSpeech") as AudioStreamPlayer 
-onready var marriage_button_scene : PackedScene = load("res://Screens/Minigames/BrokenMarriage/Buttons/MarriageButton.tscn")
+onready var marriage_button_scene : PackedScene = load(marriage_button_path)
+
 var speech_timer : bool = true
 var wrong_options : Array = [
 	"FIGHT EACH OTHER", 

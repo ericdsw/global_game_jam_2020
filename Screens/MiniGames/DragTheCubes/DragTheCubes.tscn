@@ -10,6 +10,7 @@
 script = ExtResource( 2 )
 duration = 3.0
 instructions = "DRAG TO ORDER!"
+draggable_cube_path = "res://Screens/MiniGames/DragTheCubes/Elements/LetterCube.tscn"
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )

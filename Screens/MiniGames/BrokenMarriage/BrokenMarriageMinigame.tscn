@@ -112,6 +112,7 @@ duration = 3.0
 instructions = "MARRIAGE COUNSELING!"
 no_overlay_for_success = true
 no_overlay_for_fail = true
+marriage_button_path = "res://Screens/MiniGames/BrokenMarriage/Buttons/MarriageButton.tscn"
 
 [node name="Background" type="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )
