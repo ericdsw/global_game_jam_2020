@@ -24,8 +24,10 @@ var _offset_to_cur_cube := Vector2()
 
 func _process(_delta: float) -> void:
 	
+	var _mouse_pos = get_global_mouse_position()
+	
 	if _current_cube != null and !_performing_swap:
-		_current_cube.global_position = get_global_mouse_position() - _offset_to_cur_cube
+		_current_cube.global_position = _mouse_pos - _offset_to_cur_cube
 		var _areas = _current_cube.detection_area.get_overlapping_areas()
 		
 		for cube in _cubes:
